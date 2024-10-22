@@ -1,15 +1,16 @@
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, UploadFile, File
+import pdfplumber
+from fastapi import HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import ValidationError
-from langchain_openai import ChatOpenAI
 from langchain_groq import ChatGroq
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.output_parsers import PydanticOutputParser
-import os
+import io
 from dotenv import load_dotenv
 from models import MCQList, FIBList, QuestionRequest
-from prompts import MCQ_TEMPLATE, FIB_TEMPLATE, DL_SYLLABUS, CSS_SYLLABUS, BDA_SYLLABUS
+from prompts import MCQ_TEMPLATE, FIB_TEMPLATE
 
 # Load environment variables
 load_dotenv()
@@ -40,12 +41,12 @@ def generate_questions(request_data: dict, question_type: str = "mcq"):
             template = FIB_TEMPLATE
 
         # Update syllabus in request data based on input
-        if request_data.get("syllabus") == "dl":
-            request_data["syllabus"] = DL_SYLLABUS
-        elif request_data.get("syllabus") == "css":
-            request_data["syllabus"] = CSS_SYLLABUS
-        else:
-            request_data["syllabus"] = BDA_SYLLABUS
+        # if request_data.get("syllabus") == "dl":
+        #     request_data["syllabus"] = DL_SYLLABUS
+        # elif request_data.get("syllabus") == "css":
+        #     request_data["syllabus"] = CSS_SYLLABUS
+        # else:
+        #     request_data["syllabus"] = BDA_SYLLABUS
 
         # Set up the parser
         parser = PydanticOutputParser(pydantic_object=response_model)
@@ -78,6 +79,40 @@ def generate_questions(request_data: dict, question_type: str = "mcq"):
 @app.get("/")
 async def root():
     return {"message": "Welcome to the Question Generator API"}
+
+@app.post("/upload/pdf")
+async def upload_pdf(file: UploadFile = File(...)):
+    """
+    Extract text directly from an uploaded PDF file without storing it locally.
+    """
+    if not file.filename.endswith('.pdf'):
+        raise HTTPException(status_code=400, detail="File must be a PDF")
+    
+    try:
+        # Read the file into memory
+        contents = await file.read()
+        
+        # Create a BytesIO object from the contents
+        pdf_file = io.BytesIO(contents)
+        
+        # Extract text using pdfplumber
+        text = ""
+        with pdfplumber.open(pdf_file) as pdf:
+            for page in pdf.pages:
+                extracted = page.extract_text()
+                if extracted:
+                    text += extracted + "\n"
+        
+        if not text.strip():
+            raise HTTPException(status_code=400, detail="No text found in PDF")
+        
+        return {"text": text}
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing PDF: {str(e)}")
+    finally:
+        await file.close()
+        pdf_file.close()
 
 @app.post("/generate/mcq", response_model=MCQList)
 async def generate_mcq(request: QuestionRequest):

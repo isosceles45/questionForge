@@ -11,7 +11,7 @@ function App() {
   return (
     <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY}>
       <BrowserRouter>
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen bg-neutral-900">
           <Header />
           <Routes>
             <Route

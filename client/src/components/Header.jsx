@@ -14,7 +14,7 @@ const Header = () => {
         <header className="bg-neutral-800 shadow-lg">
             <div className="container mx-auto px-4 py-3">
                 <div className="flex justify-between items-center">
-                    <div className="text-2xl font-bold text-neutral-100">
+                    <div className="text-2xl font-bold text-orange-600">
                         Question Forge
                     </div>
                     <div className="flex items-center space-x-4">
@@ -22,9 +22,9 @@ const Header = () => {
                             <nav className="flex items-center space-x-4">
                                 <a
                                     href="/dashboard"
-                                    className="text-neutral-100 hover:text-orange-500"
+                                    className="text-neutral-100 font-bold hover:text-orange-500"
                                 >
-                                    Dashboard
+                                    Generate
                                 </a>
                                 <UserButton
                                     appearance={{
