@@ -18,46 +18,60 @@ const QuestionActions = ({ response, type, onRegenerateClick }) => {
     };
 
     return (
-        <div
-            className={`flex flex-col items-center transition-all duration-300 ${
-                response ? "w-40" : "w-12"
-            }`}
-        >
+        <div className="flex flex-col items-center gap-3">
             <button
                 onClick={onRegenerateClick}
-                className={`flex flex-col items-center justify-center px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 transition-colors w-full mb-4 ${
-                    response ? "block" : "hidden"
-                }`}
+                disabled={!response}
+                className={`flex items-center justify-center px-4 py-3 rounded w-full mb-4 
+                    ${
+                        response
+                            ? "bg-orange-500 hover:bg-orange-600 text-white"
+                            : "bg-orange-900  cursor-not-allowed"
+                    }`}
             >
-                <RefreshCw className="w-6 h-6" />
-                {response && (
-                    <span className="mt-2 text-xs">Generate Again</span>
-                )}
+                <RefreshCw className="w-5 h-5 mr-2" />
+                <span className="text-md font-bold">Generate Again</span>
             </button>
 
             <button
                 onClick={() => handleDownload(false)}
-                className="flex flex-col items-center justify-center px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors w-full mb-4"
+                disabled={!response}
+                className={`flex items-center justify-center px-4 py-3 rounded w-full mb-4 
+                    ${
+                        response
+                            ? "bg-blue-500 hover:bg-blue-600 text-white"
+                            : "bg-blue-900 cursor-not-allowed"
+                    }`}
             >
-                <FileText className="w-6 h-6" />
-                {response && (
-                    <span className="mt-2 text-xs">Question Paper</span>
-                )}
+                <FileText className="w-5 h-5 mr-2" />
+                <span className="text-md font-bold">Question Paper</span>
             </button>
 
             <button
                 onClick={() => handleDownload(true)}
-                className="flex flex-col items-center justify-center px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors w-full mb-4"
+                disabled={!response}
+                className={`flex items-center justify-center px-4 py-3 rounded w-full mb-4 
+                    ${
+                        response
+                            ? "bg-green-500 hover:bg-green-600 text-white"
+                            : "bg-green-900 cursor-not-allowed"
+                    }`}
             >
-                <FileCheck className="w-6 h-6" />
-                {response && <span className="mt-2 text-xs">With Answers</span>}
+                <FileCheck className="w-5 h-5 mr-2" />
+                <span className="text-md font-bold">With Answers</span>
             </button>
 
-            <button className="flex flex-col items-center justify-center px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 transition-colors w-full mb-4">
-                <Mail className="w-6 h-6" />
-                {response && (
-                    <span className="mt-2 text-xs">Get via Email</span>
-                )}
+            <button
+                disabled={!response}
+                className={`flex items-center justify-center px-4 py-3 rounded w-full mb-4 
+                    ${
+                        response
+                            ? "bg-purple-500 hover:bg-purple-600 text-white"
+                            : "bg-purple-900  cursor-not-allowed"
+                    }`}
+            >
+                <Mail className="w-5 h-5 mr-2" />
+                <span className="text-md font-bold">Get via Email</span>
             </button>
         </div>
     );

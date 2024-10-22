@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { X, ChevronDown, ChevronUp, AlertCircle } from "lucide-react";
-import ReactMarkdown from "react-markdown";
 import Modal from "react-modal";
 
 Modal.setAppElement("#root");
@@ -133,100 +132,70 @@ const QuestionCard = ({ question, index }) => {
     );
 };
 
-const ResponseModal = ({ response }) => {
-    const [isOpen, setIsOpen] = useState(false);
+const ResponseModal = ({ response, onClose }) => {
     const [showJSON, setShowJSON] = useState(false);
 
     return (
-        <>
-            <button
-                onClick={() => setIsOpen(true)}
-                className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-lg transition-colors"
-            >
-                <svg
-                    className="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+        <Modal
+            isOpen={Boolean(response)}
+            onRequestClose={onClose}
+            className="modal-scroll max-w-6xl max-h-[90vh] overflow-y-auto mx-auto mt-10 bg-neutral-900 rounded-lg shadow-lg pl-12 pr-12 pt-8 pb-8 text-neutral-100"
+            overlayClassName="fixed inset-0 bg-black bg-opacity-75 flex items-start justify-center pt-10"
+        >
+            {/* Modal Header */}
+            <div className="flex justify-between items-center mb-6">
+                <div>
+                    <h2 className="text-2xl font-semibold text-orange-500">
+                        Generated Questions
+                    </h2>
+                    <p className="text-neutral-400 mt-1">
+                        {response?.questions?.length || 0} questions generated
+                    </p>
+                </div>
+                <button
+                    className="p-2 hover:bg-neutral-800 rounded-full transition-colors"
+                    onClick={onClose}
                 >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    <X className="h-5 w-5 text-neutral-400" />
+                </button>
+            </div>
+
+            {/* Questions List */}
+            <div className="space-y-6">
+                {response?.questions?.map((question, index) => (
+                    <QuestionCard
+                        key={index}
+                        question={question}
+                        index={index}
                     />
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                    />
-                </svg>
-                View Questions
-            </button>
+                ))}
+            </div>
 
-            <Modal
-                isOpen={isOpen}
-                onRequestClose={() => setIsOpen(false)}
-                className="modal-scroll max-w-6xl max-h-[90vh] overflow-y-auto mx-auto mt-10 bg-neutral-900 rounded-lg shadow-lg pl-12 pr-12 pt-8 pb-8 text-neutral-100"
-                overlayClassName="fixed inset-0 bg-black bg-opacity-75 flex items-start justify-center pt-10"
-            >
-                {/* Modal Header */}
-                <div className="flex justify-between items-center mb-6">
-                    <div>
-                        <h2 className="text-2xl font-semibold text-orange-500">
-                            Generated Questions
-                        </h2>
-                        <p className="text-neutral-400 mt-1">
-                            {response?.questions?.length || 0} questions
-                            generated
-                        </p>
-                    </div>
-                    <button
-                        className="p-2 hover:bg-neutral-800 rounded-full transition-colors"
-                        onClick={() => setIsOpen(false)}
-                    >
-                        <X className="h-5 w-5 text-neutral-400" />
-                    </button>
-                </div>
-
-                {/* Questions List */}
-                <div className="space-y-6">
-                    {response?.questions?.map((question, index) => (
-                        <QuestionCard
-                            key={index}
-                            question={question}
-                            index={index}
-                        />
-                    ))}
-                </div>
-
-                {/* JSON Toggle */}
-                <div className="mt-6 pt-6 border-t border-neutral-700">
-                    <button
-                        className="flex items-center text-orange-500 hover:text-orange-400 transition-colors"
-                        onClick={() => setShowJSON(!showJSON)}
-                    >
-                        {showJSON ? (
-                            <ChevronUp className="h-5 w-5" />
-                        ) : (
-                            <ChevronDown className="h-5 w-5" />
-                        )}
-                        <span className="ml-2">
-                            {showJSON ? "Hide" : "Show"} Raw JSON Response
-                        </span>
-                    </button>
-
-                    {showJSON && (
-                        <div className="mt-4">
-                            <pre className="bg-neutral-800 text-neutral-300 p-4 rounded-lg overflow-x-auto text-sm">
-                                {JSON.stringify(response, null, 2)}
-                            </pre>
-                        </div>
+            {/* JSON Toggle */}
+            <div className="mt-6 pt-6 border-t border-neutral-700">
+                <button
+                    className="flex items-center text-orange-500 hover:text-orange-400 transition-colors"
+                    onClick={() => setShowJSON(!showJSON)}
+                >
+                    {showJSON ? (
+                        <ChevronUp className="h-5 w-5" />
+                    ) : (
+                        <ChevronDown className="h-5 w-5" />
                     )}
-                </div>
-            </Modal>
-        </>
+                    <span className="ml-2">
+                        {showJSON ? "Hide" : "Show"} Raw JSON Response
+                    </span>
+                </button>
+
+                {showJSON && (
+                    <div className="mt-4">
+                        <pre className="bg-neutral-800 text-neutral-300 p-4 rounded-lg overflow-x-auto text-sm">
+                            {JSON.stringify(response, null, 2)}
+                        </pre>
+                    </div>
+                )}
+            </div>
+        </Modal>
     );
 };
 
