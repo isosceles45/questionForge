@@ -1,6 +1,5 @@
 from fastapi import FastAPI, HTTPException, UploadFile, File
 import pdfplumber
-from fastapi import HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import ValidationError
 from langchain_groq import ChatGroq
@@ -11,6 +10,7 @@ import io
 from dotenv import load_dotenv
 from models import MCQList, FIBList, QuestionRequest
 from prompts import MCQ_TEMPLATE, FIB_TEMPLATE
+import yagmail
 
 # Load environment variables
 load_dotenv()
@@ -28,8 +28,17 @@ app.add_middleware(
 
 # Initialize LLM instances
 groq = ChatGroq(model="llama-3.1-70b-versatile")
-# openai = ChatOpenAI(model="gpt-4o-mini")
 
+# Function to send email
+def send_email(to_email, subject, body, attachments):
+    try:
+        yag = yagmail.SMTP("atharvasardal06@gmail.com", "Sardal#99.99")  # Your email and password
+        yag.send(to=to_email, subject=subject, contents=body, attachments=attachments)
+        print("Email sent successfully!")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error sending email: {str(e)}")
+
+# Function to generate questions
 def generate_questions(request_data: dict, question_type: str = "mcq"):
     try:
         # Choose the appropriate model and template based on question type
@@ -39,14 +48,6 @@ def generate_questions(request_data: dict, question_type: str = "mcq"):
         else:
             response_model = FIBList
             template = FIB_TEMPLATE
-
-        # Update syllabus in request data based on input
-        # if request_data.get("syllabus") == "dl":
-        #     request_data["syllabus"] = DL_SYLLABUS
-        # elif request_data.get("syllabus") == "css":
-        #     request_data["syllabus"] = CSS_SYLLABUS
-        # else:
-        #     request_data["syllabus"] = BDA_SYLLABUS
 
         # Set up the parser
         parser = PydanticOutputParser(pydantic_object=response_model)
@@ -68,13 +69,36 @@ def generate_questions(request_data: dict, question_type: str = "mcq"):
         return structured_output
 
     except ValidationError as e:
-        # Handle validation errors for data parsing
         raise HTTPException(status_code=422, detail=f"Validation Error: {e.errors()}")
-    except HTTPException as e:
-        raise e  # Propagate known HTTP exceptions
     except Exception as e:
-        # Handle any other uncaught exceptions
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
+
+@app.post("/send_email")
+async def send_email_with_pdfs(email: str, subject: str, body: str, files: list[UploadFile] = File(...)):
+    """
+    Send an email with PDF attachments.
+    """
+    attachments = []
+
+    try:
+        # Process each uploaded file
+        for file in files:
+            if not file.filename.endswith('.pdf'):
+                raise HTTPException(status_code=400, detail="File must be a PDF")
+            
+            # Read the file into memory
+            contents = await file.read()
+            attachments.append((file.filename, contents))  # Append filename and contents for attachment
+
+        # Send the email with the attachments
+        send_email(email, subject, body, attachments)
+        return {"message": "Email sent successfully!"}
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing email: {str(e)}")
+    finally:
+        for file in files:
+            await file.close()
 
 @app.get("/")
 async def root():

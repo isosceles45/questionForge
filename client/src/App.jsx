@@ -17,6 +17,7 @@ function App() {
                     <Header />
                     <Routes>
                         <Route path="/sign-in" element={<SignIn />} />
+                        <Route path="/sign-in/factor-one" element={<SignIn />} />
                         <Route path="/sign-up" element={<SignUp />} />
                         <Route
                             path="/sign-up/verify-email-address"
