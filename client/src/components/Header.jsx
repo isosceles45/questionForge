@@ -10,51 +10,53 @@ const Header = () => {
         navigate("/sign-in");
     };
 
+    const handleClick = () => {
+        navigate("/");
+    };
+
     return (
         <header className="bg-neutral-800 shadow-lg">
-            <div className="container mx-auto px-4 py-3">
-                <div className="flex justify-between items-center">
-                    <div className="text-2xl font-bold text-orange-600">
-                        Question Forge
-                    </div>
-                    <div className="flex items-center space-x-4">
-                        <SignedIn>
-                            <nav className="flex items-center space-x-4">
-                                <a
-                                    href="/dashboard"
-                                    className="text-neutral-100 font-bold hover:text-orange-500"
-                                >
-                                    Generate
-                                </a>
-                                <UserButton
-                                    appearance={{
-                                        elements: {
-                                            userButtonBox: "hover:bg-orange-50",
-                                            userButtonTrigger:
-                                                "focus:shadow-orange-500",
-                                        },
-                                    }}
-                                />
-                            </nav>
-                        </SignedIn>
-                        <SignedOut>
-                            <div className="flex items-center space-x-4">
-                                <button
-                                    onClick={() => navigate("/sign-in")}
-                                    className="px-4 py-2 font-bold text-neutral-100 hover:text-orange-500"
-                                >
-                                    Sign In
-                                </button>
-                                <button
-                                    onClick={() => navigate("/sign-up")}
-                                    className="px-4 py-2 font-bold bg-orange-500 text-neutral-100 rounded hover:bg-orange-600 transition-colors"
-                                >
-                                    Sign Up
-                                </button>
-                            </div>
-                        </SignedOut>
-                    </div>
-                </div>
+            <div className="container mx-auto flex justify-between items-center py-6 px-6">
+                <h1
+                    onClick={handleClick}
+                    className="text-3xl font-extrabold text-orange-500 cursor-pointer transition-transform transform hover:scale-105"
+                >
+                    Question Forge
+                </h1>
+                <nav className="flex items-center space-x-6">
+                    <button
+                        onClick={() => navigate("/generate")}
+                        className="px-4 py-2 font-bold text-neutral-100 hover:text-orange-500 transition-colors"
+                    >
+                        Generate
+                    </button>
+                    <button
+                        onClick={() => navigate("/repository")}
+                        className="px-4 py-2 font-bold text-neutral-100 hover:text-orange-500 transition-colors"
+                    >
+                        Repository
+                    </button>
+                    <SignedOut>
+                        <button
+                            onClick={() => navigate("/sign-in")}
+                            className="px-4 py-2 font-bold text-neutral-100 hover:text-orange-500 transition-colors"
+                        >
+                            Sign In
+                        </button>
+                        <button
+                            onClick={() => navigate("/sign-up")}
+                            className="px-4 py-2 font-bold bg-orange-500 text-neutral-100 rounded hover:bg-orange-600 transition-colors"
+                        >
+                            Sign Up
+                        </button>
+                    </SignedOut>
+                    <SignedIn>
+                        <UserButton
+                            afterSignOut={handleSignOut}
+                            className="text-neutral-100 hover:text-orange-500 transition-colors"
+                        />
+                    </SignedIn>
+                </nav>
             </div>
         </header>
     );

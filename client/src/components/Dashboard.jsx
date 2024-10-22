@@ -108,7 +108,7 @@ const Dashboard = () => {
                         {/* Main Form Section */}
                         <div className="lg:col-span-2 bg-neutral-800 rounded-lg border border-neutral-700 overflow-hidden">
                             <div className="p-6">
-                                <h2 className="text-2xl font-semibold text-orange-500 mb-6">
+                                <h2 className="text-2xl font-semibold text-neutral-200 mb-6">
                                     Generate Questions
                                 </h2>
                                 <form
