@@ -1,5 +1,6 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import ValidationError
 from langchain_openai import ChatOpenAI
 from langchain_groq import ChatGroq
 from langchain.prompts import PromptTemplate
@@ -28,7 +29,6 @@ app.add_middleware(
 groq = ChatGroq(model="llama-3.1-70b-versatile")
 # openai = ChatOpenAI(model="gpt-4o-mini")
 
-
 def generate_questions(request_data: dict, question_type: str = "mcq"):
     try:
         # Choose the appropriate model and template based on question type
@@ -39,9 +39,10 @@ def generate_questions(request_data: dict, question_type: str = "mcq"):
             response_model = FIBList
             template = FIB_TEMPLATE
 
-        if request_data["syllabus"] == "dl":
+        # Update syllabus in request data based on input
+        if request_data.get("syllabus") == "dl":
             request_data["syllabus"] = DL_SYLLABUS
-        elif request_data["syllabus"] == "css":
+        elif request_data.get("syllabus") == "css":
             request_data["syllabus"] = CSS_SYLLABUS
         else:
             request_data["syllabus"] = BDA_SYLLABUS
@@ -65,25 +66,41 @@ def generate_questions(request_data: dict, question_type: str = "mcq"):
         structured_output = parser.parse(results.content)
         return structured_output
 
+    except ValidationError as e:
+        # Handle validation errors for data parsing
+        raise HTTPException(status_code=422, detail=f"Validation Error: {e.errors()}")
+    except HTTPException as e:
+        raise e  # Propagate known HTTP exceptions
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        # Handle any other uncaught exceptions
+        raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
+
+@app.get("/")
+async def root():
+    return {"message": "Welcome to the Question Generator API"}
 
 @app.post("/generate/mcq", response_model=MCQList)
 async def generate_mcq(request: QuestionRequest):
     """
     Generate Multiple Choice Questions based on the provided parameters.
     """
-    result = generate_questions(request.dict(), question_type="mcq", )
-    return result
+    try:
+        result = generate_questions(request.dict(), question_type="mcq")
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/generate/fib", response_model=FIBList)
 async def generate_fib(request: QuestionRequest):
     """
     Generate Fill in the Blanks questions based on the provided parameters.
     """
-    result = generate_questions(request.dict(), question_type="fib")
-    return result
+    try:
+        result = generate_questions(request.dict(), question_type="fib")
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)

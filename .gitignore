@@ -1,0 +1,29 @@
+# Python cache directories
+__pycache__/
+*.py[cod]
+
+# Environment variables
+.env
+
+# Byte-compiled files
+*.pyc
+*.pyo
+*.pyd
+
+# Distribution / packaging
+.Python
+env/
+venv/
+backend-env/
+ENV/
+env.bak/
+venv.bak/
+dist/
+build/
+*.egg-info/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# VS Code settings
+.vscode/
