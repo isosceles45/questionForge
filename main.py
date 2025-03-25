@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, UploadFile, File
+from fastapi import FastAPI, HTTPException, UploadFile, File, Query
 import pdfplumber
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import ValidationError
@@ -8,9 +8,16 @@ from langchain.chains import LLMChain
 from langchain.output_parsers import PydanticOutputParser
 import io
 from dotenv import load_dotenv
-from models import MCQList, FIBList, QuestionRequest
-from prompts import MCQ_TEMPLATE, FIB_TEMPLATE
 import yagmail
+
+from models import (
+    MCQList, FIBList, ShortAnswerList, LongAnswerList,
+    QuestionRequest
+)
+from prompts import (
+    MCQ_TEMPLATE, FIB_TEMPLATE,
+    SHORT_ANSWER_TEMPLATE, LONG_ANSWER_TEMPLATE
+)
 
 # Load environment variables
 load_dotenv()
@@ -26,13 +33,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize LLM instances
-groq = ChatGroq(model="llama-3.1-70b-versatile")
+# Initialize LLM instances with a currently supported model
+groq = ChatGroq(model="llama-3.1-70b-chat")  # Updated model name
 
 # Function to send email
 def send_email(to_email, subject, body, attachments):
     try:
-        yag = yagmail.SMTP("atharvasardal06@gmail.com", "Sardal#99.99")  # Your email and password
+        yag = yagmail.SMTP("your-email@example.com", "your-password")  # Replace with real credentials
         yag.send(to=to_email, subject=subject, contents=body, attachments=attachments)
         print("Email sent successfully!")
     except Exception as e:
@@ -45,17 +52,32 @@ def generate_questions(request_data: dict, question_type: str = "mcq"):
         if question_type == "mcq":
             response_model = MCQList
             template = MCQ_TEMPLATE
-        else:
+        elif question_type == "fib":
             response_model = FIBList
             template = FIB_TEMPLATE
+        elif question_type == "short":
+            response_model = ShortAnswerList
+            template = SHORT_ANSWER_TEMPLATE
+        elif question_type == "long":
+            response_model = LongAnswerList
+            template = LONG_ANSWER_TEMPLATE
+        else:
+            raise HTTPException(status_code=400, detail=f"Invalid question type: {question_type}")
 
         # Set up the parser
         parser = PydanticOutputParser(pydantic_object=response_model)
         format_instructions = parser.get_format_instructions()
 
+        # Create prompt template with conditional variables
+        input_variables = ["num", "subject", "syllabus", "level"]
+
+        # Add word_limit and marks for short and long answer types
+        if question_type in ["short", "long"]:
+            input_variables.extend(["word_limit", "marks"])
+
         # Create prompt template
         prompt = PromptTemplate(
-            input_variables=["num", "subject", "syllabus", "level"],
+            input_variables=input_variables,
             template=template,
             partial_variables={"format_instructions": format_instructions}
         )
@@ -63,7 +85,7 @@ def generate_questions(request_data: dict, question_type: str = "mcq"):
         # Create chain and generate response
         chain = prompt | groq
         results = chain.invoke(request_data)
-        
+
         # Parse and validate the response
         structured_output = parser.parse(results.content)
         return structured_output
@@ -72,33 +94,6 @@ def generate_questions(request_data: dict, question_type: str = "mcq"):
         raise HTTPException(status_code=422, detail=f"Validation Error: {e.errors()}")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
-
-@app.post("/send_email")
-async def send_email_with_pdfs(email: str, subject: str, body: str, files: list[UploadFile] = File(...)):
-    """
-    Send an email with PDF attachments.
-    """
-    attachments = []
-
-    try:
-        # Process each uploaded file
-        for file in files:
-            if not file.filename.endswith('.pdf'):
-                raise HTTPException(status_code=400, detail="File must be a PDF")
-            
-            # Read the file into memory
-            contents = await file.read()
-            attachments.append((file.filename, contents))  # Append filename and contents for attachment
-
-        # Send the email with the attachments
-        send_email(email, subject, body, attachments)
-        return {"message": "Email sent successfully!"}
-    
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error processing email: {str(e)}")
-    finally:
-        for file in files:
-            await file.close()
 
 @app.get("/")
 async def root():
@@ -111,14 +106,14 @@ async def upload_pdf(file: UploadFile = File(...)):
     """
     if not file.filename.endswith('.pdf'):
         raise HTTPException(status_code=400, detail="File must be a PDF")
-    
+
     try:
         # Read the file into memory
         contents = await file.read()
-        
+
         # Create a BytesIO object from the contents
         pdf_file = io.BytesIO(contents)
-        
+
         # Extract text using pdfplumber
         text = ""
         with pdfplumber.open(pdf_file) as pdf:
@@ -126,12 +121,12 @@ async def upload_pdf(file: UploadFile = File(...)):
                 extracted = page.extract_text()
                 if extracted:
                     text += extracted + "\n"
-        
+
         if not text.strip():
             raise HTTPException(status_code=400, detail="No text found in PDF")
-        
+
         return {"text": text}
-        
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing PDF: {str(e)}")
     finally:
@@ -140,23 +135,47 @@ async def upload_pdf(file: UploadFile = File(...)):
 
 @app.post("/generate/mcq", response_model=MCQList)
 async def generate_mcq(request: QuestionRequest):
-    """
-    Generate Multiple Choice Questions based on the provided parameters.
-    """
+    """Generate Multiple Choice Questions"""
     try:
-        result = generate_questions(request.dict(), question_type="mcq")
-        return result
+        return generate_questions(request.dict(), question_type="mcq")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/generate/fib", response_model=FIBList)
 async def generate_fib(request: QuestionRequest):
-    """
-    Generate Fill in the Blanks questions based on the provided parameters.
-    """
+    """Generate Fill in the Blanks questions"""
     try:
-        result = generate_questions(request.dict(), question_type="fib")
-        return result
+        return generate_questions(request.dict(), question_type="fib")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/generate/short", response_model=ShortAnswerList)
+async def generate_short_answer(
+        request: QuestionRequest,
+        word_limit: int = Query(150, description="Maximum word count for short answers"),
+        marks: int = Query(5, description="Marks allocated to each question")
+):
+    """Generate Short Answer Questions"""
+    try:
+        request_dict = request.dict()
+        request_dict["word_limit"] = word_limit
+        request_dict["marks"] = marks
+        return generate_questions(request_dict, question_type="short")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/generate/long", response_model=LongAnswerList)
+async def generate_long_answer(
+        request: QuestionRequest,
+        word_limit: int = Query(500, description="Suggested word count for long answers"),
+        marks: int = Query(10, description="Marks allocated to each question")
+):
+    """Generate Long Answer Questions"""
+    try:
+        request_dict = request.dict()
+        request_dict["word_limit"] = word_limit
+        request_dict["marks"] = marks
+        return generate_questions(request_dict, question_type="long")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
