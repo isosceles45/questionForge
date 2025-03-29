@@ -3,6 +3,7 @@ import pdfplumber
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import ValidationError
 from langchain_groq import ChatGroq
+from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.output_parsers import PydanticOutputParser
@@ -34,7 +35,7 @@ app.add_middleware(
 )
 
 # Initialize LLM instances with a currently supported model
-groq = ChatGroq(model="llama-3.1-70b-chat")  # Updated model name
+groq = ChatOpenAI(model="gpt-4o")  # Updated model name
 
 # Function to send email
 def send_email(to_email, subject, body, attachments):
