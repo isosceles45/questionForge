@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Eye, Share2 } from "lucide-react";
+import { useState } from "react";
+import { Share2, Eye } from "lucide-react";
 import QuestionActions from "./QuestionActions";
 import ResponseModal from "./ResponseModal";
 
@@ -15,6 +15,8 @@ const Dashboard = () => {
         subject: "",
         level: "intermediate",
         syllabus: "",
+        word_limit: 150,  // Default for short answers
+        marks: 5          // Default for short answers
     });
 
     const handleFileUpload = async (e) => {
@@ -60,7 +62,7 @@ const Dashboard = () => {
     };
 
     const generateQuestions = async (e) => {
-        e.preventDefault();
+        if (e) e.preventDefault();
         setLoading(true);
         setError(null);
 
@@ -71,19 +73,38 @@ const Dashboard = () => {
                 );
             }
 
-            const endpoint =
-                formData.type === "mcq" ? "/generate/mcq" : "/generate/fib";
+            // Determine the correct endpoint based on question type
+            let endpoint;
+            let requestBody = {
+                num: formData.num,
+                subject: formData.subject,
+                level: formData.level,
+                syllabus: formData.syllabus,
+            };
+
+            switch (formData.type) {
+                case "mcq":
+                    endpoint = "/generate/mcq";
+                    break;
+                case "fib":
+                    endpoint = "/generate/fib";
+                    break;
+                case "short":
+                    endpoint = `/generate/short?word_limit=${formData.word_limit}&marks=${formData.marks}`;
+                    break;
+                case "long":
+                    endpoint = `/generate/long?word_limit=${formData.word_limit}&marks=${formData.marks}`;
+                    break;
+                default:
+                    throw new Error("Invalid question type");
+            }
+
             const response = await fetch(`http://127.0.0.1:8000${endpoint}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({
-                    num: formData.num,
-                    subject: formData.subject,
-                    level: formData.level,
-                    syllabus: formData.syllabus,
-                }),
+                body: JSON.stringify(requestBody),
             });
 
             if (!response.ok) {
@@ -120,19 +141,16 @@ const Dashboard = () => {
                                         <label className="block text-neutral-200 font-medium mb-2">
                                             Question Type
                                         </label>
-                                        <div className="flex space-x-4">
+                                        <div className="flex flex-wrap gap-4">
                                             <label className="inline-flex items-center">
                                                 <input
                                                     type="radio"
                                                     value="mcq"
-                                                    checked={
-                                                        formData.type === "mcq"
-                                                    }
+                                                    checked={formData.type === "mcq"}
                                                     onChange={(e) =>
                                                         setFormData((prev) => ({
                                                             ...prev,
-                                                            type: e.target
-                                                                .value,
+                                                            type: e.target.value,
                                                         }))
                                                     }
                                                     className="text-orange-500 border-orange-500 focus:ring-orange-500"
@@ -145,20 +163,55 @@ const Dashboard = () => {
                                                 <input
                                                     type="radio"
                                                     value="fib"
-                                                    checked={
-                                                        formData.type === "fib"
-                                                    }
+                                                    checked={formData.type === "fib"}
                                                     onChange={(e) =>
                                                         setFormData((prev) => ({
                                                             ...prev,
-                                                            type: e.target
-                                                                .value,
+                                                            type: e.target.value,
                                                         }))
                                                     }
                                                     className="text-orange-500 border-orange-500 focus:ring-orange-500"
                                                 />
                                                 <span className="ml-2 text-neutral-200">
                                                     Fill in the Blanks
+                                                </span>
+                                            </label>
+                                            <label className="inline-flex items-center">
+                                                <input
+                                                    type="radio"
+                                                    value="short"
+                                                    checked={formData.type === "short"}
+                                                    onChange={(e) =>
+                                                        setFormData((prev) => ({
+                                                            ...prev,
+                                                            type: e.target.value,
+                                                            word_limit: 150,
+                                                            marks: 5
+                                                        }))
+                                                    }
+                                                    className="text-orange-500 border-orange-500 focus:ring-orange-500"
+                                                />
+                                                <span className="ml-2 text-neutral-200">
+                                                    Short Answer
+                                                </span>
+                                            </label>
+                                            <label className="inline-flex items-center">
+                                                <input
+                                                    type="radio"
+                                                    value="long"
+                                                    checked={formData.type === "long"}
+                                                    onChange={(e) =>
+                                                        setFormData((prev) => ({
+                                                            ...prev,
+                                                            type: e.target.value,
+                                                            word_limit: 500,
+                                                            marks: 10
+                                                        }))
+                                                    }
+                                                    className="text-orange-500 border-orange-500 focus:ring-orange-500"
+                                                />
+                                                <span className="ml-2 text-neutral-200">
+                                                    Long Answer
                                                 </span>
                                             </label>
                                         </div>
@@ -232,6 +285,48 @@ const Dashboard = () => {
                                         </select>
                                     </div>
 
+                                    {/* Advanced Parameters for Short and Long Answers */}
+                                    {(formData.type === "short" || formData.type === "long") && (
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-neutral-700/30 rounded-md">
+                                            <div>
+                                                <label className="block text-neutral-200 text-sm mb-1">
+                                                    Word Limit
+                                                </label>
+                                                <input
+                                                    type="number"
+                                                    min="50"
+                                                    max={formData.type === "short" ? 250 : 1000}
+                                                    value={formData.word_limit}
+                                                    onChange={(e) =>
+                                                        setFormData((prev) => ({
+                                                            ...prev,
+                                                            word_limit: parseInt(e.target.value),
+                                                        }))
+                                                    }
+                                                    className="w-full px-3 py-2 bg-neutral-700 border border-neutral-600 rounded-md text-neutral-100 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block text-neutral-200 text-sm mb-1">
+                                                    Marks per Question
+                                                </label>
+                                                <input
+                                                    type="number"
+                                                    min="1"
+                                                    max="20"
+                                                    value={formData.marks}
+                                                    onChange={(e) =>
+                                                        setFormData((prev) => ({
+                                                            ...prev,
+                                                            marks: parseInt(e.target.value),
+                                                        }))
+                                                    }
+                                                    className="w-full px-3 py-2 bg-neutral-700 border border-neutral-600 rounded-md text-neutral-100 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                                />
+                                            </div>
+                                        </div>
+                                    )}
+
                                     {/* Syllabus Upload */}
                                     <div>
                                         <label className="block text-neutral-200 font-medium mb-2">
@@ -253,7 +348,7 @@ const Dashboard = () => {
                                     </div>
 
                                     {/* Button Group */}
-                                    <div className="flex space-x-4">
+                                    <div className="flex flex-wrap gap-4">
                                         <button
                                             type="submit"
                                             disabled={loading || !extractedText}
@@ -277,9 +372,9 @@ const Dashboard = () => {
                                                 onClick={() =>
                                                     setShowQuestions(true)
                                                 }
-                                                className="px-2 py-2 flex flex-row gap-2 bg-neutral-700 text-white rounded-md hover:bg-neutral-600 transition-colors"
+                                                className="px-4 py-2 flex items-center justify-center bg-neutral-700 text-white rounded-md hover:bg-neutral-600 transition-colors"
                                             >
-                                                <Eye/>
+                                                <Eye className="mr-2" />
                                                 View Questions
                                             </button>
                                         )}
@@ -311,6 +406,7 @@ const Dashboard = () => {
                     <ResponseModal
                         response={response}
                         onClose={() => setShowQuestions(false)}
+                        type={formData.type}
                     />
                 )}
             </div>

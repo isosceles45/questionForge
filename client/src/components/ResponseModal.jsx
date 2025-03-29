@@ -1,139 +1,122 @@
-import React, { useState } from "react";
-import { X, ChevronDown, ChevronUp, AlertCircle } from "lucide-react";
+import { useState } from "react";
+import { X, ChevronDown, ChevronUp } from "lucide-react";
 import Modal from "react-modal";
+import {MCQCard} from "./answer-cards/MCQCard.jsx";
+import {FIBCard} from "./answer-cards/FIBCard.jsx";
+import {LongAnswerCard} from "./answer-cards/LongAnswerCard.jsx";
+import {ShortAnswerCard} from "./answer-cards/ShortAnswerCard.jsx";
 
 Modal.setAppElement("#root");
 
-const QuestionCard = ({ question, index }) => {
-    const isMCQ = Boolean(question.options);
-
-    return (
-        <div className="mb-6 bg-neutral-800/50 border border-neutral-700 rounded-lg overflow-hidden">
-            {/* Question Header */}
-            <div className="p-4 border-b border-neutral-700">
-                <div className="flex justify-between items-start">
-                    <div>
-                        <span className="inline-block px-2 py-1 text-xs rounded-full border border-orange-500 text-orange-500 mb-2">
-                            Question {index + 1}
-                        </span>
-                        <h3 className="text-lg font-semibold text-neutral-100">
-                            {question.question}
-                        </h3>
-                    </div>
-                    <div className="flex flex-col gap-1">
-                        <span className="px-3 py-2 mb-2 font-medium text-xs text-center bg-neutral-600 rounded-full">
-                            {question.metadata.subject}
-                        </span>
-                        <span className="px-3 py-2 font-medium text-xs text-center bg-neutral-700 rounded-full">
-                            {question.difficulty_level}
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            {/* Question Content */}
-            <div className="p-4">
-                {isMCQ ? (
-                    // MCQ Options
-                    <div className="space-y-3">
-                        <h4 className="font-medium text-neutral-300">
-                            Options:
-                        </h4>
-                        <div className="grid gap-2">
-                            {question.options.map((option, idx) => (
-                                <div
-                                    key={idx}
-                                    className={`p-3 rounded-lg border ${
-                                        option.correct === "true"
-                                            ? "border-green-500 bg-green-500/10"
-                                            : "border-neutral-600 bg-neutral-700/50"
-                                    }`}
-                                >
-                                    <span className="font-medium">
-                                        {String.fromCharCode(65 + idx)}.{" "}
-                                    </span>
-                                    <span
-                                        className={
-                                            option.correct === "true"
-                                                ? "text-green-400"
-                                                : "text-neutral-300"
-                                        }
-                                    >
-                                        {option.text}
-                                    </span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                ) : (
-                    // Fill in the blanks
-                    <div className="space-y-3">
-                        <h4 className="font-medium text-neutral-300">
-                            Answer:
-                        </h4>
-                        <div className="p-3 rounded-lg border border-green-500 bg-green-500/10">
-                            <span className="text-green-400">
-                                {question.answer}
-                            </span>
-                        </div>
-                    </div>
-                )}
-
-                {/* Explanation */}
-                <div className="mt-4 pt-4 border-t border-neutral-700">
-                    <div className="flex items-start gap-2">
-                        <AlertCircle className="w-5 h-5 text-orange-500 mt-0.5" />
-                        <div>
-                            <h4 className="font-medium text-orange-500 mb-1">
-                                Explanation
-                            </h4>
-                            <p className="text-neutral-300">
-                                {question.explanation}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Metadata */}
-                <div className="mt-4 pt-4 border-t border-neutral-700">
-                    <div className="grid grid-cols-2 gap-4 text-sm">
-                        <div>
-                            <span className="text-neutral-500">Topic:</span>{" "}
-                            <span className="text-neutral-300">
-                                {question.metadata.topic}
-                            </span>
-                        </div>
-                        <div>
-                            <span className="text-neutral-500">Subtopic:</span>{" "}
-                            <span className="text-neutral-300">
-                                {question.metadata.subtopic}
-                            </span>
-                        </div>
-                        <div>
-                            <span className="text-neutral-500">
-                                Bloom's Level:
-                            </span>{" "}
-                            <span className="text-neutral-300">
-                                {question.blooms_taxanomy}
-                            </span>
-                        </div>
-                        <div>
-                            <span className="text-neutral-500">
-                                Course Outcome:
-                            </span>{" "}
-                            <span className="text-neutral-300">
-                                {question.course_outcomes}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-const ResponseModal = ({ response, onClose }) => {
+// Main Modal Component
+const ResponseModal = ({ response, onClose, type = "mcq" }) => {
     const [showJSON, setShowJSON] = useState(false);
+
+    // Helper to transform the response format if needed
+    const processResponse = () => {
+        // If the response already has the expected structure, return it as is
+        if ((type === "mcq" && response.mcqs) ||
+            (type === "fib" && response.fibs) ||
+            (type === "short" && response.short_answers) ||
+            (type === "long" && response.long_answers)) {
+            return response;
+        }
+
+        // If we have a questions array, transform it to the expected format
+        if (response.questions) {
+            const processedResponse = {};
+
+            switch (type) {
+                case "mcq":
+                    processedResponse.mcqs = response.questions;
+                    break;
+                case "fib":
+                    processedResponse.fibs = response.questions;
+                    break;
+                case "short":
+                    processedResponse.short_answers = response.questions.map(q => ({
+                        question: q.question,
+                        answer: q.model_answer || q.answer,
+                        model_answer: q.model_answer,
+                        word_limit: q.word_limit,
+                        marks: q.marks,
+                        explanation: q.explanation,
+                        keywords: q.keywords,
+                        // Only add marking scheme if it exists
+                        ...(q.marking_scheme && { marking_scheme: q.marking_scheme })
+                    }));
+                    break;
+                case "long":
+                    processedResponse.long_answers = response.questions.map(q => ({
+                        question: q.question,
+                        answer: q.model_answer || q.answer,
+                        model_answer: q.model_answer,
+                        word_limit: q.word_limit,
+                        marks: q.marks,
+                        explanation: q.explanation,
+                        keywords: q.keywords,
+                        // Only add marking scheme if it exists
+                        ...(q.marking_scheme && { marking_scheme: q.marking_scheme })
+                    }));
+                    break;
+            }
+
+            return processedResponse;
+        }
+
+        // Return the original response if no transformation is needed
+        return response;
+    };
+
+    const processedResponse = processResponse();
+
+    const renderQuestions = () => {
+        if (type === "mcq" && processedResponse.mcqs) {
+            return processedResponse.mcqs.map((question, index) => (
+                <MCQCard key={index} question={question} index={index} />
+            ));
+        } else if (type === "fib" && processedResponse.fibs) {
+            return processedResponse.fibs.map((question, index) => (
+                <FIBCard key={index} question={question} index={index} />
+            ));
+        } else if (type === "short" && processedResponse.short_answers) {
+            return processedResponse.short_answers.map((question, index) => (
+                <ShortAnswerCard key={index} question={question} index={index} />
+            ));
+        } else if (type === "long" && processedResponse.long_answers) {
+            return processedResponse.long_answers.map((question, index) => (
+                <LongAnswerCard key={index} question={question} index={index} />
+            ));
+        }
+        return <p className="text-neutral-400">No questions available</p>;
+    };
+
+    // Get title based on question type
+    const getTitle = () => {
+        switch (type) {
+            case "mcq": return "Multiple Choice Questions";
+            case "fib": return "Fill in the Blanks";
+            case "short": return "Short Answer Questions";
+            case "long": return "Long Answer Questions";
+            default: return "Questions";
+        }
+    };
+
+    // Count questions based on type
+    const getQuestionCount = () => {
+        if (type === "mcq" && processedResponse.mcqs) {
+            return processedResponse.mcqs.length;
+        } else if (type === "fib" && processedResponse.fibs) {
+            return processedResponse.fibs.length;
+        } else if (type === "short" && processedResponse.short_answers) {
+            return processedResponse.short_answers.length;
+        } else if (type === "long" && processedResponse.long_answers) {
+            return processedResponse.long_answers.length;
+        } else if (response.questions) {
+            return response.questions.length;
+        }
+        return 0;
+    };
 
     return (
         <Modal
@@ -146,10 +129,10 @@ const ResponseModal = ({ response, onClose }) => {
             <div className="flex justify-between items-center mb-6">
                 <div>
                     <h2 className="text-2xl font-semibold text-orange-500">
-                        Generated Questions
+                        {getTitle()}
                     </h2>
                     <p className="text-neutral-400 mt-1">
-                        {response?.questions?.length || 0} questions generated
+                        {getQuestionCount()} questions generated
                     </p>
                 </div>
                 <button
@@ -162,13 +145,7 @@ const ResponseModal = ({ response, onClose }) => {
 
             {/* Questions List */}
             <div className="space-y-6">
-                {response?.questions?.map((question, index) => (
-                    <QuestionCard
-                        key={index}
-                        question={question}
-                        index={index}
-                    />
-                ))}
+                {renderQuestions()}
             </div>
 
             {/* JSON Toggle */}
