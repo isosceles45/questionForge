@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException, UploadFile, File, Query
 import pdfplumber
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import ValidationError
-from langchain_groq import ChatGroq
+# from langchain_groq import ChatGroq
 from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
@@ -136,7 +136,6 @@ async def upload_pdf(file: UploadFile = File(...)):
 
 @app.post("/generate/mcq", response_model=MCQList)
 async def generate_mcq(request: QuestionRequest):
-    """Generate Multiple Choice Questions"""
     try:
         return generate_questions(request.dict(), question_type="mcq")
     except Exception as e:
@@ -156,7 +155,6 @@ async def generate_short_answer(
         word_limit: int = Query(150, description="Maximum word count for short answers"),
         marks: int = Query(5, description="Marks allocated to each question")
 ):
-    """Generate Short Answer Questions"""
     try:
         request_dict = request.dict()
         request_dict["word_limit"] = word_limit
@@ -171,7 +169,6 @@ async def generate_long_answer(
         word_limit: int = Query(500, description="Suggested word count for long answers"),
         marks: int = Query(10, description="Marks allocated to each question")
 ):
-    """Generate Long Answer Questions"""
     try:
         request_dict = request.dict()
         request_dict["word_limit"] = word_limit

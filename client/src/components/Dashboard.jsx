@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Share2, Eye, FileText, Upload, AlertCircle } from "lucide-react";
+import { Share2, Eye, FileText, AlertCircle } from "lucide-react";
 import QuestionActions from "./QuestionActions";
 import ResponseModal from "./ResponseModal";
 

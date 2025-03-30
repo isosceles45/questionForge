@@ -2,9 +2,8 @@ import { Heart } from "lucide-react";
 
 const Footer = () => {
     return (
-        <footer className="bg-gradient-to-br from-white to-purple-50 text-gray-800 relative overflow-hidden py-16">
-
-            <div className="container mx-auto px-4 relative z-10">
+        <footer className="bg-gradient-to-br from-white to-purple-50 text-gray-800 overflow-hidden py-16">
+            <div className="container mx-auto px-4 z-10">
                 <div className="text-center backdrop-blur-md bg-white/60 border border-white/40 p-6 md:p-8 rounded-xl shadow-md hover:shadow-blue-100/50 transition-all">
                     <div className="mb-6 opacity-60">
                         <div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>

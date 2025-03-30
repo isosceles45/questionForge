@@ -6,6 +6,7 @@ import Dashboard from "./components/Dashboard";
 import SignUp from "./components/SignUp";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
+import MidtermPaperGenerator from "./components/mid-term/MidtermPaperGenerator.jsx";
 
 const CLERK_PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -28,6 +29,14 @@ function App() {
                             element={
                                 <ProtectedRoute>
                                     <Dashboard />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/generate/mid-term"
+                            element={
+                                <ProtectedRoute>
+                                    <MidtermPaperGenerator />
                                 </ProtectedRoute>
                             }
                         />
