@@ -1,85 +1,29 @@
-import React from "react";
-import { FaTwitter, FaFacebook, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { Heart } from "lucide-react";
 
 const Footer = () => {
     return (
-        <footer className="bg-neutral-950 text-neutral-300 py-8 mt-5">
-            <div className="container mx-auto px-4">
-                <div className="flex flex-col md:flex-row justify-between items-center">
-                    <div className="mb-4 md:mb-0">
-                        <h2 className="text-2xl font-bold text-orange-500">
-                            Question Forge
-                        </h2>
-                        <p className="text-xl">
-                            Revolutionizing assessment processes with AI
-                        </p>
-                        <p className="text-xl my-2">
-                            Join us on our journey to transform education
-                            through innovative technology.
-                        </p>
+        <footer className="bg-gradient-to-br from-white to-purple-50 text-gray-800 relative overflow-hidden py-16">
+
+            <div className="container mx-auto px-4 relative z-10">
+                <div className="text-center backdrop-blur-md bg-white/60 border border-white/40 p-6 md:p-8 rounded-xl shadow-md hover:shadow-blue-100/50 transition-all">
+                    <div className="mb-6 opacity-60">
+                        <div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
                     </div>
-                    <ul className="flex space-x-6 mb-4 md:mb-0">
-                        <li>
-                            <a
-                                href="https://twitter.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center text-base hover:text-orange-400 transition-colors duration-200"
-                            >
-                                <FaTwitter className="mr-2" />
-                                Twitter
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="https://facebook.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center text-base hover:text-orange-400 transition-colors duration-200"
-                            >
-                                <FaFacebook className="mr-2" />
-                                Facebook
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="https://linkedin.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center text-base hover:text-orange-400 transition-colors duration-200"
-                            >
-                                <FaLinkedin className="mr-2" />
-                                LinkedIn
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="https://instagram.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center text-base hover:text-orange-400 transition-colors duration-200"
-                            >
-                                <FaInstagram className="mr-2" />
-                                Instagram
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div className="text-center mt-4">
-                    <p className="text-base">
-                        &copy; {new Date().getFullYear()} Question Forge. All
-                        rights reserved.
+
+                    <p className="text-gray-700 mb-3 font-medium">
+                        &copy; {new Date().getFullYear()} Question Forge. All rights reserved.
                     </p>
-                    <p className="text-sm mt-1">
-                        Created with ❤️ by the Question Forge team. For
-                        inquiries, contact us at{" "}
+
+                    <p className="text-sm text-gray-600 flex items-center justify-center gap-1">
+                        Created with
+                        <Heart size={14} className="text-red-500 fill-red-500 inline mx-1" />
+                        by the Question Forge team. For inquiries, contact us at{" "}
                         <a
-                            href="mailto:support@questionforge.com"
-                            className="text-orange-500 hover:underline"
+                            href="mailto:atharvasardal06@gmail.com"
+                            className="bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text hover:underline font-medium ml-1"
                         >
-                            support@questionforge.com
+                            atharvasardal06@gmail.com
                         </a>
-                        .
                     </p>
                 </div>
             </div>

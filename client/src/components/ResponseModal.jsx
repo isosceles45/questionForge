@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X, ChevronDown, ChevronUp } from "lucide-react";
+import { X, ChevronDown, ChevronUp, Info, FileText } from "lucide-react";
 import Modal from "react-modal";
 import {MCQCard} from "./answer-cards/MCQCard.jsx";
 import {FIBCard} from "./answer-cards/FIBCard.jsx";
@@ -88,7 +88,7 @@ const ResponseModal = ({ response, onClose, type = "mcq" }) => {
                 <LongAnswerCard key={index} question={question} index={index} />
             ));
         }
-        return <p className="text-neutral-400">No questions available</p>;
+        return <p className="text-gray-500">No questions available</p>;
     };
 
     // Get title based on question type
@@ -99,6 +99,17 @@ const ResponseModal = ({ response, onClose, type = "mcq" }) => {
             case "short": return "Short Answer Questions";
             case "long": return "Long Answer Questions";
             default: return "Questions";
+        }
+    };
+
+    // Get icon based on question type
+    const getTitleIcon = () => {
+        switch (type) {
+            case "mcq": return "M";
+            case "fib": return "F";
+            case "short": return "S";
+            case "long": return "L";
+            default: return "Q";
         }
     };
 
@@ -122,36 +133,50 @@ const ResponseModal = ({ response, onClose, type = "mcq" }) => {
         <Modal
             isOpen={Boolean(response)}
             onRequestClose={onClose}
-            className="modal-scroll max-w-6xl max-h-[90vh] overflow-y-auto mx-auto mt-10 bg-neutral-900 rounded-lg shadow-lg pl-12 pr-12 pt-8 pb-8 text-neutral-100"
-            overlayClassName="fixed inset-0 bg-black bg-opacity-75 flex items-start justify-center pt-10"
+            className="modal-scroll max-w-6xl max-h-[90vh] overflow-y-auto mx-auto mt-10 bg-white rounded-2xl shadow-xl border border-gray-100 px-6 py-6 sm:p-8 text-gray-800"
+            overlayClassName="fixed inset-0 bg-gray-800/75 backdrop-blur-sm flex items-start justify-center pt-10"
+            style={{
+                content: {
+                    backgroundImage: 'linear-gradient(to bottom right, rgba(239, 246, 255, 0.6), rgba(255, 255, 255, 0.8), rgba(243, 232, 255, 0.6))'
+                }
+            }}
         >
             {/* Modal Header */}
-            <div className="flex justify-between items-center mb-6">
-                <div>
-                    <h2 className="text-2xl font-semibold text-orange-500">
-                        {getTitle()}
-                    </h2>
-                    <p className="text-neutral-400 mt-1">
-                        {getQuestionCount()} questions generated
-                    </p>
+            <div className="flex justify-between items-center mb-6 pb-4 border-b border-gray-200">
+                <div className="flex items-center">
+                    <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white font-bold mr-3 shadow-sm">
+                        {getTitleIcon()}
+                    </div>
+                    <div>
+                        <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
+                            {getTitle()}
+                        </h2>
+                        <div className="flex items-center mt-1">
+                            <span className="text-gray-500 flex items-center">
+                                <FileText className="h-4 w-4 mr-1" />
+                                {getQuestionCount()} questions generated
+                            </span>
+                        </div>
+                    </div>
                 </div>
                 <button
-                    className="p-2 hover:bg-neutral-800 rounded-full transition-colors"
+                    className="p-2 hover:bg-gray-100 rounded-full transition-colors"
                     onClick={onClose}
+                    aria-label="Close modal"
                 >
-                    <X className="h-5 w-5 text-neutral-400" />
+                    <X className="h-5 w-5 text-gray-500" />
                 </button>
             </div>
 
             {/* Questions List */}
-            <div className="space-y-6">
+            <div className="space-y-6 pb-4">
                 {renderQuestions()}
             </div>
 
             {/* JSON Toggle */}
-            <div className="mt-6 pt-6 border-t border-neutral-700">
+            <div className="mt-6 pt-4 border-t border-gray-200">
                 <button
-                    className="flex items-center text-orange-500 hover:text-orange-400 transition-colors"
+                    className="flex items-center text-gray-600 hover:text-blue-600 transition-colors py-2 px-3 rounded-lg hover:bg-blue-50"
                     onClick={() => setShowJSON(!showJSON)}
                 >
                     {showJSON ? (
@@ -159,14 +184,18 @@ const ResponseModal = ({ response, onClose, type = "mcq" }) => {
                     ) : (
                         <ChevronDown className="h-5 w-5" />
                     )}
-                    <span className="ml-2">
+                    <span className="ml-2 font-medium">
                         {showJSON ? "Hide" : "Show"} Raw JSON Response
                     </span>
                 </button>
 
                 {showJSON && (
                     <div className="mt-4">
-                        <pre className="bg-neutral-800 text-neutral-300 p-4 rounded-lg overflow-x-auto text-sm">
+                        <div className="flex items-center mb-2 text-gray-500 text-sm">
+                            <Info className="h-4 w-4 mr-1" />
+                            <span>Raw API response data</span>
+                        </div>
+                        <pre className="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm whitespace-pre-wrap">
                             {JSON.stringify(response, null, 2)}
                         </pre>
                     </div>

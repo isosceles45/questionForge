@@ -1,8 +1,7 @@
-import React from "react";
-import { BookOpen, BarChart2, Shield, ClipboardCheck } from "lucide-react";
-import heroImage from "../assets/heroImage.jpg";
-import platformImage from "../assets/platform.jpg";
+import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { UICard01, UICard02, UICard03 } from "../utils/constant.jsx";
+import QuestionPaperStack from "../components/QuestionPaperStack";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -12,214 +11,160 @@ const Home = () => {
     };
 
     return (
-        <div className="min-h-screen bg-neutral-900 text-neutral-100">
-            {/* Hero Section */}
-            <div className="relative">
-                <div className="absolute inset-0">
-                    <img
-                        src={heroImage}
-                        alt="Hero Background"
-                        className="w-full h-full object-cover opacity-40"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-b from-neutral-900/60 to-neutral-900"></div>
-                </div>
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 text-gray-800">
+            {/* Enhanced Hero Section with QuestionPaperStack */}
+            {/* Enhanced Hero Section with QuestionPaperStack */}
+            <div className="relative overflow-hidden">
+                {/* Background gradient instead of image */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-100/70 to-purple-100/70"></div>
 
-                <div className="relative container mx-auto px-4 pt-20 pb-24">
-                    <h1 className="text-5xl md:text-6xl font-bold text-center mb-6 bg-gradient-to-r from-orange-400 to-orange-600 text-transparent bg-clip-text">
-                        Welcome to Question Forge
-                    </h1>
-                    <p className="text-xl md:text-2xl text-center mb-8 text-neutral-200 max-w-3xl mx-auto">
-                        Revolutionizing the way question papers are generated
-                        using Generative AI!
-                    </p>
-                    <div className="flex justify-center">
-                        <button
-                            onClick={handleClick}
-                            className="bg-orange-500 text-white px-8 py-3 rounded-lg hover:bg-orange-600 transition-all transform hover:scale-105 font-semibold text-lg shadow-xl hover:shadow-orange-500/20"
-                        >
-                            Get Started
-                        </button>
+                {/* Refined decorative elements */}
+                <div className="absolute top-20 left-10 w-64 h-64 bg-blue-300/20 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-20 right-10 w-80 h-80 bg-purple-300/20 rounded-full blur-3xl"></div>
+                <div className="absolute top-40 right-1/4 w-40 h-40 bg-blue-200/30 rounded-full blur-2xl"></div>
+
+                <div className="relative container mx-auto px-4 py-16 md:py-24">
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
+                        {/* Left side: Text content with improved readability */}
+                        <div className="md:w-1/2 p-4">
+                            {/* Added a subtle effect to make the heading pop */}
+                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text leading-tight">
+                                Generate Mumbai University Question Papers with Ease
+                            </h1>
+
+                            {/* Simplified text with improved spacing and fixed typos */}
+                            <div className="space-y-4 mb-8">
+                                <p className="text-lg md:text-xl text-gray-700 max-w-xl leading-relaxed">
+                                    Create mid-term question papers and continuous assessment quizzes in one go!
+                                </p>
+                                <p className="text-lg md:text-xl text-gray-700 max-w-xl leading-relaxed">
+                                    Store syllabus and PYQs in a GRAPH database for precise question generation and comprehensive knowledge mapping.
+                                </p>
+                            </div>
+
+                            {/* Enhanced button with better accessibility */}
+                            <button
+                                onClick={handleClick}
+                                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full hover:shadow-lg hover:shadow-blue-300/50 transition-all transform hover:-translate-y-1 font-semibold text-lg flex items-center"
+                                aria-label="Get Started with Question Paper Generator"
+                            >
+                                Get Started
+                                <ChevronRight className="ml-2 h-5 w-5" />
+                            </button>
+                        </div>
+
+                        {/* Right side: Question Paper Stack with improved container */}
+                        <div className="md:w-1/2 flex justify-center">
+                            <div className="w-full max-w-md filter drop-shadow-xl">
+                                <QuestionPaperStack />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Added a quick features highlight section */}
+                    <div className="hidden md:flex justify-center mt-12 pt-6 border-t border-blue-100">
+                        <div className="flex flex-wrap justify-center gap-6">
+                            <div className="flex items-center bg-white/60 px-4 py-2 rounded-full shadow-sm">
+                                <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                                <span className="text-sm font-medium text-gray-700">AI-Powered Generation</span>
+                            </div>
+                            <div className="flex items-center bg-white/60 px-4 py-2 rounded-full shadow-sm">
+                                <div className="w-2 h-2 bg-purple-500 rounded-full mr-2"></div>
+                                <span className="text-sm font-medium text-gray-700">MU Guidelines Compliant</span>
+                            </div>
+                            <div className="flex items-center bg-white/60 px-4 py-2 rounded-full shadow-sm">
+                                <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                                <span className="text-sm font-medium text-gray-700">Customizable Templates</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            {/* Features Grid with Glassmorphism Cards */}
+            <div className="container mx-auto px-4 py-20">
+                <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-gray-800">
+                    <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
+                        Intelligent Assessment Solutions
+                    </span>
+                </h2>
 
-            {/* Features Grid */}
-            <div className="container mx-auto px-4 py-16">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-                    {[
-                        {
-                            icon: (
-                                <BookOpen className="w-12 h-12 text-orange-500 mb-6" />
-                            ),
-                            title: "Smart Generation",
-                            description:
-                                "Generate customized question papers in minutes, not hours! Our AI ensures a variety of question types and difficulty levels tailored to your curriculum.",
-                        },
-                        {
-                            icon: (
-                                <BarChart2 className="w-12 h-12 text-orange-500 mb-6" />
-                            ),
-                            title: "Market Insights",
-                            description:
-                                "With a projected global market growth to USD 11.47 billion by 2027, our solution is positioned to meet the demands of modern educational assessments.",
-                        },
-                        {
-                            icon: (
-                                <Shield className="w-12 h-12 text-orange-500 mb-6" />
-                            ),
-                            title: "Enhanced Security",
-                            description:
-                                "Incorporating blockchain technology and multi-factor authentication to ensure the integrity and security of question papers.",
-                        },
-                        {
-                            icon: (
-                                <ClipboardCheck className="w-12 h-12 text-orange-500 mb-6" />
-                            ),
-                            title: "Proven Impact",
-                            description:
-                                "Achieve a 45% improvement in assessment quality and a 70% reduction in paper leaks with our AI-driven solution.",
-                        },
-                    ].map((feature, index) => (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+                    {UICard01.map((feature, index) => (
                         <div
                             key={index}
-                            className="bg-neutral-800/50 backdrop-blur border border-neutral-700 p-8 rounded-xl shadow-xl hover:shadow-orange-500/5 transition-all hover:-translate-y-1"
+                            className="backdrop-blur-md bg-white/60 border border-white/40 p-6 rounded-2xl shadow-xl hover:shadow-blue-200/50 transition-all hover:-translate-y-1"
                         >
-                            {feature.icon}
-                            <h2 className="text-2xl font-bold mb-4 text-orange-400">
+                            <div className="bg-blue-50/70 p-4 rounded-full inline-block mb-4">
+                                {feature.icon}
+                            </div>
+                            <h2 className="text-xl font-bold mb-3 bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
                                 {feature.title}
                             </h2>
-                            <p className="text-neutral-300 text-lg leading-relaxed">
+                            <p className="text-gray-700 leading-relaxed">
                                 {feature.description}
                             </p>
                         </div>
                     ))}
                 </div>
 
-                {/* Platform Preview Section */}
-                <div className="mb-20">
-                    <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-orange-400">
-                        Transform Your Assessment Process
+                {/* Testimonials Section with Improved Layout */}
+                <div className="mb-24">
+                    <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-gray-800">
+                        <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
+                            What Educators Are Saying
+                        </span>
                     </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                        <div className="order-2 md:order-1">
-                            <h3 className="text-2xl font-bold mb-4 text-neutral-100">
-                                Streamlined Question Generation
-                            </h3>
-                            <p className="text-neutral-300 text-lg mb-6 leading-relaxed">
-                                Our platform leverages advanced AI to create
-                                high-quality, diverse question sets that align
-                                perfectly with your curriculum objectives.
-                            </p>
-                            <ul className="space-y-4">
-                                {[
-                                    "Customizable difficulty levels",
-                                    "Multiple question formats",
-                                    "Instant generation and export",
-                                    "Smart content analysis",
-                                ].map((feature, index) => (
-                                    <li
-                                        key={index}
-                                        className="flex items-center text-neutral-200"
-                                    >
-                                        <span className="w-2 h-2 bg-orange-500 rounded-full mr-3"></span>
-                                        {feature}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <div className="order-1 md:order-2 flex justify-center">
-                            <img
-                                src={platformImage}
-                                alt="Platform Preview"
-                                className="rounded-xl shadow-2xl border border-neutral-700 max-w-xs md:max-w-md"
-                            />
-                        </div>
-                    </div>
-                </div>
-
-                {/* Testimonials Section */}
-                <div className="mb-20">
-                    <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-orange-400">
-                        What Our Users Say
-                    </h2>
-                    <div className="flex flex-col space-y-8">
-                        {[
-                            {
-                                name: "Dr. Alice Smith",
-                                feedback:
-                                    "Question Forge has transformed the way I generate assessments. The AI technology is impressive and saves me so much time!",
-                            },
-                            {
-                                name: "Mr. John Doe",
-                                feedback:
-                                    "The customization options are incredible. I can easily create question papers that meet my curriculum needs.",
-                            },
-                            {
-                                name: "Prof. Jane Doe",
-                                feedback:
-                                    "A must-have tool for any educator! The platform is user-friendly, and the results are always of high quality.",
-                            },
-                        ].map((testimonial, index) => (
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {UICard02.map((testimonial, index) => (
                             <div
                                 key={index}
-                                className="bg-neutral-800 p-6 rounded-lg shadow-lg"
+                                className="backdrop-blur-md bg-white/60 p-8 rounded-2xl shadow-xl border border-white/40 hover:shadow-blue-200/50 transition-all"
                             >
-                                <p className="text-neutral-300 italic mb-4">
+                                <div className="mb-6 text-blue-600">
+                                    {"★".repeat(5)}
+                                </div>
+                                <p className="text-gray-700 italic mb-8 text-lg leading-relaxed">
                                     "{testimonial.feedback}"
                                 </p>
-                                <h3 className="text-orange-400 font-bold">
-                                    - {testimonial.name}
-                                </h3>
+                                <div className="flex items-center">
+                                    <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full mr-3 flex items-center justify-center text-white font-bold">
+                                        {testimonial.name.charAt(0)}
+                                    </div>
+                                    <div>
+                                        <h3 className="text-gray-900 font-bold">
+                                            {testimonial.name}
+                                        </h3>
+                                        <p className="text-gray-600">{testimonial.role}</p>
+                                    </div>
+                                </div>
                             </div>
                         ))}
                     </div>
                 </div>
 
-                {/* FAQs Section */}
-                <div className="mb-20">
-                    <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-orange-400">
-                        Frequently Asked Questions
+                {/* FAQs Section with Improved Glassmorphism */}
+                <div className=" backdrop-blur-md bg-white/30 border border-white/40 p-10 rounded-2xl shadow-xl">
+                    <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-gray-800">
+                        <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
+                            Frequently Asked Questions
+                        </span>
                     </h2>
-                    <div className="space-y-6">
-                        {[
-                            {
-                                question: "How does the AI generate questions?",
-                                answer: "Our AI uses advanced algorithms and data analysis to create high-quality, diverse questions tailored to your curriculum.",
-                            },
-                            {
-                                question: "Can I customize the questions?",
-                                answer: "Yes! You can customize difficulty levels, formats, and even the subject matter to fit your needs.",
-                            },
-                            {
-                                question: "Is my data secure?",
-                                answer: "Absolutely! We use blockchain technology and multi-factor authentication to ensure the integrity and security of your data.",
-                            },
-                        ].map((faq, index) => (
+                    <div className="space-y-6 max-w-4xl mx-auto">
+                        {UICard03.map((faq, index) => (
                             <div
                                 key={index}
-                                className="bg-neutral-800 p-6 rounded-lg shadow-lg"
+                                className="bg-white/70 p-6 rounded-xl shadow-md border border-white/20 hover:shadow-blue-100 transition-all"
                             >
-                                <h3 className="text-orange-400 font-bold mb-2">
+                                <h3 className="text-gray-900 font-bold text-xl mb-3 flex items-center">
+                                    <span className="w-8 h-8 inline-flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full mr-3 text-sm">
+                                        {index + 1}
+                                    </span>
                                     {faq.question}
                                 </h3>
-                                <p className="text-neutral-300">{faq.answer}</p>
+                                <p className="text-gray-700 leading-relaxed pl-11">{faq.answer}</p>
                             </div>
                         ))}
                     </div>
-                </div>
-
-                {/* CTA Section */}
-                <div className="text-center py-12">
-                    <h2 className="text-3xl font-bold mb-6 text-neutral-100">
-                        Ready to Get Started?
-                    </h2>
-                    <p className="text-xl text-neutral-300 mb-8 max-w-2xl mx-auto">
-                        Join thousands of educators who are already transforming
-                        their assessment process with Question Forge.
-                    </p>
-                    <button className="bg-orange-500 text-white px-8 py-3 rounded-lg hover:bg-orange-600 transition-all transform hover:scale-105 font-semibold text-lg shadow-xl hover:shadow-orange-500/20">
-                        Start Now
-                    </button>
                 </div>
             </div>
         </div>
