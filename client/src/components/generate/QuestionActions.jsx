@@ -1,5 +1,5 @@
 import { RefreshCw, FileText, FileCheck, ArrowRight } from "lucide-react";
-import { generateQuestionsPDF } from "../utils/pdfGenerator";
+import { generateQuestionsPDF } from "../../utils/pdfGenerator.js";
 
 const QuestionActions = ({ response, type, onRegenerateClick }) => {
     // Handle PDF download with or without answers

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { X, ChevronDown, ChevronUp, Info, FileText } from "lucide-react";
 import Modal from "react-modal";
-import {MCQCard} from "./answer-cards/MCQCard.jsx";
-import {FIBCard} from "./answer-cards/FIBCard.jsx";
-import {LongAnswerCard} from "./answer-cards/LongAnswerCard.jsx";
-import {ShortAnswerCard} from "./answer-cards/ShortAnswerCard.jsx";
+import {MCQCard} from "../answer-cards/MCQCard.jsx";
+import {FIBCard} from "../answer-cards/FIBCard.jsx";
+import {LongAnswerCard} from "../answer-cards/LongAnswerCard.jsx";
+import {ShortAnswerCard} from "../answer-cards/ShortAnswerCard.jsx";
 
 Modal.setAppElement("#root");
 

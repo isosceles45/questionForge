@@ -2,7 +2,7 @@ import { ClerkProvider, SignedIn } from "@clerk/clerk-react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import SignIn from "./components/SignIn";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/generate/Dashboard.jsx";
 import SignUp from "./components/SignUp";
 import Home from "./components/Home";
 import Footer from "./components/Footer";

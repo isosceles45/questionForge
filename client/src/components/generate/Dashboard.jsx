@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Share2, Eye, FileText, AlertCircle } from "lucide-react";
-import QuestionActions from "./QuestionActions";
-import ResponseModal from "./ResponseModal";
+import QuestionActions from "./QuestionActions.jsx";
+import ResponseModal from "./ResponseModal.jsx";
 
 const Dashboard = () => {
     const [loading, setLoading] = useState(false);

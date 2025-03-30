@@ -26,7 +26,7 @@ const Home = () => {
                 <div className="relative container mx-auto px-4 py-16 md:py-24">
                     <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
                         {/* Left side: Text content with improved readability */}
-                        <div className="md:w-1/2 p-4">
+                        <div className="md:w-1/2 px-10 py-4">
                             {/* Added a subtle effect to make the heading pop */}
                             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text leading-tight">
                                 Generate Mumbai University Question Papers with Ease
@@ -54,7 +54,7 @@ const Home = () => {
                         </div>
 
                         {/* Right side: Question Paper Stack with improved container */}
-                        <div className="md:w-1/2 flex justify-center">
+                        <div className="md:w-1/2 md:flex hidden justify-center">
                             <div className="w-full max-w-md filter drop-shadow-xl">
                                 <QuestionPaperStack />
                             </div>
@@ -143,7 +143,7 @@ const Home = () => {
                 </div>
 
                 {/* FAQs Section with Improved Glassmorphism */}
-                <div className=" backdrop-blur-md bg-white/30 border border-white/40 p-10 rounded-2xl shadow-xl">
+                <div className="backdrop-blur-md bg-white/30 border border-white/40 p-10 rounded-2xl">
                     <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-gray-800">
                         <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
                             Frequently Asked Questions
@@ -156,7 +156,7 @@ const Home = () => {
                                 className="bg-white/70 p-6 rounded-xl shadow-md border border-white/20 hover:shadow-blue-100 transition-all"
                             >
                                 <h3 className="text-gray-900 font-bold text-xl mb-3 flex items-center">
-                                    <span className="w-8 h-8 inline-flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full mr-3 text-sm">
+                                    <span className="w-6 h-6 inline-flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full mr-3 text-sm">
                                         {index + 1}
                                     </span>
                                     {faq.question}

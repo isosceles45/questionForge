@@ -1,8 +1,8 @@
 from fastapi import FastAPI, HTTPException, UploadFile, File, Query
 import pdfplumber
 from fastapi.middleware.cors import CORSMiddleware
+from contextlib import asynccontextmanager
 from pydantic import ValidationError
-# from langchain_groq import ChatGroq
 from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
@@ -11,11 +11,15 @@ import io
 from dotenv import load_dotenv
 import yagmail
 
-from models import (
+import graph_rag.graph_routes
+# Import database and graph routes
+from graph_rag.database import get_db
+
+from question_pipeline.models import (
     MCQList, FIBList, ShortAnswerList, LongAnswerList,
     QuestionRequest
 )
-from prompts import (
+from question_pipeline.prompts import (
     MCQ_TEMPLATE, FIB_TEMPLATE,
     SHORT_ANSWER_TEMPLATE, LONG_ANSWER_TEMPLATE
 )
@@ -23,7 +27,16 @@ from prompts import (
 # Load environment variables
 load_dotenv()
 
-app = FastAPI(title="Question Generator API")
+# Define lifespan context manager
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup: No additional code needed for startup
+    yield
+    # Shutdown: Close database connection
+    db = get_db()
+    db.close()
+
+app = FastAPI(title="Question Generator API", lifespan=lifespan)
 
 # Add CORS middleware
 app.add_middleware(
@@ -35,7 +48,9 @@ app.add_middleware(
 )
 
 # Initialize LLM instances with a currently supported model
-groq = ChatOpenAI(model="gpt-4o")  # Updated model name
+groq = ChatOpenAI(model="gpt-4o")
+
+app.include_router(graph_rag.graph_routes.router)
 
 # Function to send email
 def send_email(to_email, subject, body, attachments):
@@ -99,6 +114,10 @@ def generate_questions(request_data: dict, question_type: str = "mcq"):
 @app.get("/")
 async def root():
     return {"message": "Welcome to the Question Generator API"}
+
+@app.get("/hello")
+async def hello():
+    return {"message": "Hello World"}
 
 @app.post("/upload/pdf")
 async def upload_pdf(file: UploadFile = File(...)):

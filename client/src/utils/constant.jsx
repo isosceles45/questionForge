@@ -2,25 +2,25 @@ import {BarChart2, BookOpen, ClipboardCheck, Shield} from "lucide-react";
 
 export const UICard01 = [
     {
-        icon: <BookOpen className="w-12 h-12 text-blue-600 mb-6" />,
+        icon: <BookOpen className="w-12 h-12 text-blue-600" />,
         title: "AI-Powered Generation",
         description:
             "Create comprehensive question papers in minutes. Our AI ensures pedagogically sound questions aligned with learning outcomes and curriculum objectives.",
     },
     {
-        icon: <BarChart2 className="w-12 h-12 text-purple-600 mb-6" />,
+        icon: <BarChart2 className="w-12 h-12 text-purple-600" />,
         title: "Analytics Dashboard",
         description:
             "Gain valuable insights into question quality, coverage of syllabus topics, and alignment with Bloom's taxonomy levels through our intuitive analytics.",
     },
     {
-        icon: <Shield className="w-12 h-12 text-blue-600 mb-6" />,
+        icon: <Shield className="w-12 h-12 text-blue-600" />,
         title: "Content Security",
         description:
             "Ensure question paper integrity with our advanced security measures including unique paper fingerprinting and encrypted distribution channels.",
     },
     {
-        icon: <ClipboardCheck className="w-12 h-12 text-purple-600 mb-6" />,
+        icon: <ClipboardCheck className="w-12 h-12 text-purple-600" />,
         title: "Assessment Quality",
         description:
             "Enhance assessment quality with diversified question types, difficulty calibration, and built-in validation against educational standards.",
