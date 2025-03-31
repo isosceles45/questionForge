@@ -486,3 +486,120 @@ class GraphRepository:
                                        )
 
         return syllabus_id
+
+    # Add these methods to your GraphRepository class
+
+    def find_similar_questions(self, question_text, question_type=None, similarity_threshold=0.7):
+        """Find questions similar to the given text"""
+        with self.db.driver.session() as session:
+            result = session.execute_read(
+                self._find_similar_questions_tx,
+                question_text,
+                question_type,
+                similarity_threshold
+            )
+            return {
+                "status": "success",
+                "message": f"Found {len(result)} similar questions",
+                "data": result
+            }
+
+    def _find_similar_questions_tx(self, tx, question_text, question_type, similarity_threshold):
+        # Base query - this is a simplified version
+        # In production, you would use proper text similarity algorithms
+        query = """
+        MATCH (q:Question)
+        WHERE apoc.text.fuzzyMatch(q.text, $question_text) > $threshold
+        """
+
+        # Add filter for question type if provided
+        if question_type:
+            query += "AND q.question_type = $question_type "
+
+        # Complete the query
+        query += """
+        RETURN q.id as id, q.text as text, q.answer as answer,
+               q.question_type as question_type, q.marks as marks,
+               apoc.text.fuzzyMatch(q.text, $question_text) as similarity
+        ORDER BY similarity DESC
+        LIMIT 5
+        """
+
+        params = {
+            "question_text": question_text,
+            "threshold": similarity_threshold
+        }
+
+        if question_type:
+            params["question_type"] = question_type
+
+        result = tx.run(query, **params)
+        return [dict(record) for record in result]
+
+    def evaluate_paper_coverage(self, syllabus_id, pyq_id):
+        """Evaluate how well a question paper covers a syllabus"""
+        with self.db.driver.session() as session:
+            result = session.execute_read(self._evaluate_paper_coverage_tx, syllabus_id, pyq_id)
+            return {
+                "status": "success",
+                "message": "Paper coverage evaluation completed",
+                "data": result
+            }
+
+    def _evaluate_paper_coverage_tx(self, tx, syllabus_id, pyq_id):
+        # Get all topics in the syllabus
+        topics_query = """
+        MATCH (s:Syllabus {id: $syllabus_id})-[:CONTAINS]->(t:Topic)
+        RETURN t.id as topic_id, t.name as topic_name, 
+               t.module_name as module_name, t.hours as hours
+        """
+
+        topics_result = tx.run(topics_query, syllabus_id=syllabus_id)
+        topics = [dict(record) for record in topics_result]
+
+        # Get all questions in the paper
+        questions_query = """
+        MATCH (p:PYQ {id: $pyq_id})-[:CONTAINS]->(q:Question)
+        OPTIONAL MATCH (q)-[:RELATES_TO]->(t:Topic)
+        RETURN q.id as question_id, q.text as question_text, 
+               q.question_type as question_type, q.marks as marks,
+               collect(t.id) as topic_ids
+        """
+
+        questions_result = tx.run(questions_query, pyq_id=pyq_id)
+        questions = [dict(record) for record in questions_result]
+
+        # Calculate coverage statistics
+        topic_coverage = {}
+        for topic in topics:
+            topic_coverage[topic["topic_id"]] = {
+                "topic_id": topic["topic_id"],
+                "topic_name": topic["topic_name"],
+                "module_name": topic["module_name"],
+                "questions": 0,
+                "marks": 0,
+                "is_covered": False
+            }
+
+        # Count questions and marks per topic
+        for question in questions:
+            topic_ids = question.get("topic_ids", [])
+            for topic_id in topic_ids:
+                if topic_id in topic_coverage:
+                    topic_coverage[topic_id]["questions"] += 1
+                    topic_coverage[topic_id]["marks"] += question.get("marks", 0)
+                    topic_coverage[topic_id]["is_covered"] = True
+
+        # Calculate overall statistics
+        total_topics = len(topics)
+        covered_topics = sum(1 for t in topic_coverage.values() if t["is_covered"])
+        coverage_percentage = (covered_topics / total_topics) * 100 if total_topics > 0 else 0
+
+        return {
+            "syllabus_id": syllabus_id,
+            "paper_id": pyq_id,
+            "total_topics": total_topics,
+            "covered_topics": covered_topics,
+            "coverage_percentage": coverage_percentage,
+            "topic_coverage": list(topic_coverage.values())
+        }

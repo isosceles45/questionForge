@@ -1,6 +1,8 @@
 from fastapi import APIRouter, HTTPException, Depends
 from typing import List, Dict, Any, Optional
 from pydantic import BaseModel, EmailStr
+
+from utils import neo4j_json_response
 from .graph_repository import GraphRepository
 
 router = APIRouter(prefix="/graph", tags=["Graph Database"])
@@ -75,14 +77,24 @@ async def add_topic(
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.get("/syllabus/user/{email}", response_model=Dict[str, Any])
+@router.get("/syllabus/user/{email}")
 async def get_syllabi_by_user(
         email: EmailStr,
         repo: GraphRepository = Depends(get_repository)
 ):
     """Get all syllabi for a user"""
     try:
-        return repo.get_user_syllabi(email)
+        result = repo.get_user_syllabi(email)
+
+        # Remove DateTime fields from the response
+        if "data" in result:
+            for item in result["data"]:
+                if "created_at" in item:
+                    del item["created_at"]
+                if "updated_at" in item:
+                    del item["updated_at"]
+
+        return result
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
