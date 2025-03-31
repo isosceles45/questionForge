@@ -7,6 +7,7 @@ import SignUp from "./components/SignUp";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
 import MidtermPaperGenerator from "./components/mid-term/MidtermPaperGenerator.jsx";
+import Syllabus from "./components/syllabus/Syllabus.jsx";
 
 const CLERK_PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -37,6 +38,14 @@ function App() {
                             element={
                                 <ProtectedRoute>
                                     <MidtermPaperGenerator />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/syllabus"
+                            element={
+                                <ProtectedRoute>
+                                    <Syllabus />
                                 </ProtectedRoute>
                             }
                         />
