@@ -1,0 +1,1188 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d7" for="edge" attr.name="order" attr.type="long"/>
+<key id="d6" for="edge" attr.name="source_id" attr.type="string"/>
+<key id="d5" for="edge" attr.name="description" attr.type="string"/>
+<key id="d4" for="edge" attr.name="weight" attr.type="double"/>
+<key id="d3" for="node" attr.name="clusters" attr.type="string"/>
+<key id="d2" for="node" attr.name="source_id" attr.type="string"/>
+<key id="d1" for="node" attr.name="description" attr.type="string"/>
+<key id="d0" for="node" attr.name="entity_type" attr.type="string"/>
+<graph edgedefault="undirected"><node id="ADDO8013 REINFORCEMENT LEARNING">
+  <data key="d0">SUBJECT</data>
+  <data key="d1">This course provides an in-depth exploration of reinforcement learning (RL). It covers foundational concepts, algorithms, and diverse applications of RL with an emphasis on rewards, decision-making through Markov decision processes, and applications of advanced RL algorithms.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 1}, {"level": 1, "cluster": 12}]</data>
+</node>
+<node id="PREREQUISITE">
+  <data key="d0">TOPIC</data>
+  <data key="d1">Basic knowledge of probability distributions, expected values, and fundamental linear algebra concepts such as inner products.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+</node>
+<node id="INTRODUCTION TO REINFORCEMENT LEARNING">
+  <data key="d0">TOPIC</data>
+  <data key="d1">A foundational overview of Reinforcement Learning, its key features and elements, including RL types and the role of rewards. Learning Objectives: Understand core concepts and differentiate between RL algorithms.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 1}, {"level": 1, "cluster": 12}]</data>
+</node>
+<node id="REINFORCEMENT LEARNING ALGORITHMS">
+  <data key="d0">TOPIC</data>
+  <data key="d1">Algorithms tailored for reinforcement learning tasks, such as SARSA, Q-learning, and Monte Carlo methods, each with specific applications and complexities.&lt;SEP&gt;Q-Learning, State Action Reward State action (SARSA).</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3&lt;SEP&gt;chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d3">[{"level": 0, "cluster": 10}, {"level": 1, "cluster": 19}]</data>
+</node>
+<node id="BANDIT PROBLEMS AND ONLINE LEARNING">
+  <data key="d0">TOPIC</data>
+  <data key="d1">Introduction to bandit problems and methodologies used in online learning contexts. Learning Objectives: Develop abilities to solve n-Armed Bandit Problems and implement action-value methods.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 0}]</data>
+</node>
+<node id="AN N-ARMED BANDIT PROBLEM">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">Discuss approaches to solving this fundamental problem in decision making.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 0}]</data>
+</node>
+<node id="ACTION-VALUE METHODS">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">Methods used in Reinforcement Learning for estimating the value of taking certain actions in a given state.&lt;SEP&gt;Techniques for tracking nonstationary problems.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 0}]</data>
+</node>
+<node id="OPTIMISTIC INITIAL VALUES">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">A technique in Reinforcement Learning for encouraging exploration by assuming each action will yield the maximum possible reward.&lt;SEP&gt;Strategies for effective action selection using optimistic initial values.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 0}]</data>
+</node>
+<node id="UPPER-CONFIDENCE-BOUND ACTION SELECTION">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">A method for balancing exploration and exploitation in Reinforcement Learning by adding a confidence bonus to the estimated value of actions.&lt;SEP&gt;Learn about using confidence bounds to inform decision making.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 0}]</data>
+</node>
+<node id="GRADIENT BANDITS">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">Approaches in Reinforcement Learning where preferences for actions are modeled using gradient-based techniques.&lt;SEP&gt;Implementing gradient-based approaches for bandit problems.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 0}]</data>
+</node>
+<node id="MARKOV DECISION PROCESSES">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">A subtopic under the Fundamentals of Reinforcement Learning concerning decision-making processes involving Markov properties to resolve stochastic decision problems.&lt;SEP&gt;In-depth study of the Markov decision process, including agent-environment interactions. Learning Objectives: Understand and apply Markov properties and decision processes to calculate value functions.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3&lt;SEP&gt;chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d3">[{"level": 0, "cluster": 7}]</data>
+</node>
+<node id="THE AGENT–ENVIRONMENT INTERFACE">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">Exploration of the interaction model between agents and environments.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 7}]</data>
+</node>
+<node id="GOALS AND REWARDS">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">Concepts in Reinforcement Learning where agents pursue goals and receive signals (rewards) that assess their progress.&lt;SEP&gt;Formulating goals and rewards in RL settings.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 7}]</data>
+</node>
+<node id="RETURNS AND MARKOV PROPERTIES">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">An examination of the returns (rewards) received over time and how they satisfy Markov Properties in a given state.&lt;SEP&gt;Understanding Markov properties and applicability.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 7}]</data>
+</node>
+<node id="MARKOV DECISION PROCESS">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">Comprehensive study of MDPs.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 7}]</data>
+</node>
+<node id="VALUE FUNCTIONS AND OPTIMAL VALUE FUNCTIONS">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">Developing and optimizing value functions.&lt;SEP&gt;Functions in Reinforcement Learning that estimate expected rewards, with optimal value functions being the best approximations.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 7}]</data>
+</node>
+<node id="DYNAMIC PROGRAMMING">
+  <data key="d0">TOPIC</data>
+  <data key="d1">Study of algorithms for solving RL problems through dynamic programming approaches. Learning Objectives: Master methods like policy evaluation and value iteration.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 2}]</data>
+</node>
+<node id="POLICY EVALUATION (PREDICTION)">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">Techniques for evaluating policies.&lt;SEP&gt;The process of predicting the value of a policy in Reinforcement Learning to estimate how good the policy is for a given state.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 2}]</data>
+</node>
+<node id="POLICY IMPROVEMENT">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">Methods of improving existing policies.&lt;SEP&gt;Techniques in Reinforcement Learning to improve current policies by making better action choices.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 2}]</data>
+</node>
+<node id="POLICY ITERATION">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">A method in Reinforcement Learning comprising policy evaluation and improvement repeatedly until the optimal policy is found.&lt;SEP&gt;Process of iterative policy improvement.&lt;SEP&gt;A subtopic under Reinforcement Learning Theory dealing with the iterative methods for policy improvement and evaluation, aiming at comprehension at a hard difficulty level.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3&lt;SEP&gt;chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d3">[{"level": 0, "cluster": 2}]</data>
+</node>
+<node id="VALUE ITERATION">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">A dynamic programming process in Reinforcement Learning to find the optimal policy by repeatedly updating the value of each state.&lt;SEP&gt;Strategies for calculating optimal values.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 2}]</data>
+</node>
+<node id="ASYNCHRONOUS DYNAMIC PROGRAMMING">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">A variant of dynamic programming that updates states non-uniformly across iterations, used in Reinforcement Learning.&lt;SEP&gt;Implementation of asynchronous approaches to dynamic programming.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 2}]</data>
+</node>
+<node id="GENERALIZED POLICY ITERATION">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">A broader framework in Reinforcement Learning combining policy evaluation and improvement to iteratively approach optimal solutions.&lt;SEP&gt;Integrating multiple approaches for improved policy iteration.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 2}]</data>
+</node>
+<node id="MONTE CARLO METHODS AND TEMPORAL-DIFFERENCE LEARNING">
+  <data key="d0">TOPIC</data>
+  <data key="d1">Examination of advanced prediction and control methods in RL. Learning Objectives: Expertise in Monte Carlo methods and temporal-difference learning for prediction and control.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 10}, {"level": 1, "cluster": 17}]</data>
+</node>
+<node id="MONTE CARLO PREDICTION">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">A prediction technique within Monte Carlo methods involving computations based on first-visit and advantages in games like blackjack.&lt;SEP&gt;Implementing Monte Carlo methods for predicting future states.&lt;SEP&gt;Using Monte Carlo methods in Reinforcement Learning to predict the outcome of actions based on observed episodes.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3&lt;SEP&gt;chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d3">[{"level": 0, "cluster": 10}, {"level": 1, "cluster": 18}]</data>
+</node>
+<node id="MONTE CARLO ESTIMATION OF ACTION VALUES">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">Using Monte Carlo methods to estimate specific action values.&lt;SEP&gt;Using Monte Carlo simulations to approximate the expected value of actions in Reinforcement Learning.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 10}, {"level": 1, "cluster": 17}]</data>
+</node>
+<node id="MONTE CARLO CONTROL">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">Strategies for controlling processes using Monte Carlo methods.&lt;SEP&gt;Strategies in Reinforcement Learning using Monte Carlo methods to find optimal policies by exploring different actions.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 10}, {"level": 1, "cluster": 17}]</data>
+</node>
+<node id="TD PREDICTION">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">Implementing temporal-difference learning for prediction.&lt;SEP&gt;Temporal difference learning methods to estimate the value function using samples from the environment as data.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 10}, {"level": 1, "cluster": 17}]</data>
+</node>
+<node id="TD CONTROL USING Q-LEARNING">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">Effective control in RL using Q-learning approaches.&lt;SEP&gt;Using TD learning to improve Q-learning estimates for developing better control policies in RL.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 10}, {"level": 1, "cluster": 17}]</data>
+</node>
+<node id="APPLICATIONS AND CASE STUDIES">
+  <data key="d0">TOPIC</data>
+  <data key="d1">Exploration of practical applications of RL in various domains. Learning Objectives: Apply RL principles to real-world situations.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 1}, {"level": 1, "cluster": 11}]</data>
+</node>
+<node id="ELEVATOR DISPATCHING">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">Application of RL techniques to enhance the scheduling and efficiency of elevator systems.&lt;SEP&gt;Implementing RL strategies in elevator dispatch systems.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 1}, {"level": 1, "cluster": 11}]</data>
+</node>
+<node id="DYNAMIC CHANNEL ALLOCATION">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">Application of RL in channel allocation for communication systems.&lt;SEP&gt;Employment of RL to optimize channel allocation in communication networks, ensuring efficient data transmission.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 1}, {"level": 1, "cluster": 11}]</data>
+</node>
+<node id="JOB-SHOP SCHEDULING">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">Using RL to enhance scheduling processes in job-shop environments.&lt;SEP&gt;Utilizing RL algorithms to improve the scheduling of tasks and resources in job-shop operations for efficiency.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d3">[{"level": 0, "cluster": 1}, {"level": 1, "cluster": 11}]</data>
+</node>
+<node id="Q-LEARNING">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">Part of Reinforcement Learning algorithms, used for learning the value of an action in a particular state.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+</node>
+<node id="STATE ACTION REWARD STATE ACTION (SARSA)">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">An algorithm in Reinforcement Learning, a type of temporal difference learning for state-action pairs.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+</node>
+<node id="N-ARMED BANDIT PROBLEM">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">A problem in Reinforcement Learning dealing with choosing the best option among n choices to maximize reward.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+</node>
+<node id="AGENT-ENVIRONMENT INTERFACE">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">The framework within which the agent interacts with the environment to achieve its goals through actions and perceives responses.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+</node>
+<node id="MARKOV DECISION PROCESS (MDP)">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">A mathematical process that models decision-making in dynamic, stochastic environments with a focus on maximizing cumulative rewards.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+</node>
+<node id="MONTE CARLO METHODS">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">A class of Reinforcement Learning algorithms used to estimate the value of actions based on the average of sampled episodes.&lt;SEP&gt;A methodology under Reinforcement Learning Algorithms that entails using sampled data for predictions, advantageous over Dynamic Programming in specific scenarios.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3&lt;SEP&gt;chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d3">[{"level": 0, "cluster": 10}, {"level": 1, "cluster": 19}]</data>
+</node>
+<node id="TEMPORAL-DIFFERENCE LEARNING">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">A combination of Monte Carlo ideas and dynamic programming principles for online learning in Reinforcement Learning.</data>
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+</node>
+<node id="REINFORCEMENT LEARNING: AN INTRODUCTION, BY RICHARD S. SUTTON AND ANDREW G. BARTO">
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d1">"references"</data>
+  <data key="d0">"UNKNOWN"</data>
+  <data key="d3">[{"level": 0, "cluster": 1}, {"level": 1, "cluster": 12}]</data>
+</node>
+<node id="THE REINFORCEMENT LEARNING WORKSHOP: LEARN HOW TO APPLY CUTTING-EDGE REINFORCEMENT LEARNING ALGORITHMS TO A WIDE RANGE OF CONTROL PROBLEMS, 2020, PACKT PUBLISHING">
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d1">"references"</data>
+  <data key="d0">"UNKNOWN"</data>
+  <data key="d3">[{"level": 0, "cluster": 1}, {"level": 1, "cluster": 12}]</data>
+</node>
+<node id="REINFORCEMENT LEARNING INDUSTRIAL APPLICATIONS WITH INTELLIGENT AGENTS, O’REILLY">
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d1">"references"</data>
+  <data key="d0">"UNKNOWN"</data>
+  <data key="d3">[{"level": 0, "cluster": 1}, {"level": 1, "cluster": 12}]</data>
+</node>
+<node id="PRACTICAL REINFORCEMENT LEARNING, PACKT PUBLISHING, 2017">
+  <data key="d2">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d1">"references"</data>
+  <data key="d0">"UNKNOWN"</data>
+  <data key="d3">[{"level": 0, "cluster": 1}, {"level": 1, "cluster": 12}]</data>
+</node>
+<node id="REINFORCEMENT LEARNING">
+  <data key="d0">SUBJECT</data>
+  <data key="d1">A field of machine learning focused on how agents should take actions in an environment to maximize cumulative reward.&lt;SEP&gt;Study of algorithms that allow machines to learn from actions and optimize decision-making processes over time, focusing on achieving goals through exploration and exploitation&lt;SEP&gt;Subject focusing on the study of how agents ought to take actions in an environment so as to maximize some notion of cumulative reward over time.</data>
+  <data key="d2">chunk-5d32567366bb059b9b2b2aefd5dbd87f&lt;SEP&gt;chunk-312b45904d3587796a9473ebd66e30d1&lt;SEP&gt;chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d3">[{"level": 0, "cluster": 9}, {"level": 1, "cluster": 13}]</data>
+</node>
+<node id="AI &amp; DS">
+  <data key="d0">SUBJECT</data>
+  <data key="d1">Branch of study focusing on artificial intelligence systems and data science methodologies</data>
+  <data key="d2">chunk-5d32567366bb059b9b2b2aefd5dbd87f</data>
+</node>
+<node id="REINFORCEMENT LEARNING THEORY">
+  <data key="d0">TOPIC</data>
+  <data key="d1">Theoretical aspects of Reinforcement Learning, focusing on understanding policies and iterations such as policy iteration, its complexities and applications.</data>
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d3">[{"level": 0, "cluster": 9}, {"level": 1, "cluster": 13}]</data>
+</node>
+<node id="SARSA VS Q-LEARNING">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">A subtopic under Reinforcement Learning Algorithms focusing on the comparison between SARSA (on-policy) and Q-learning (off-policy) with practical examples at a medium difficulty level, targeting the analysis cognitive level.</data>
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d3">[{"level": 0, "cluster": 10}, {"level": 1, "cluster": 19}]</data>
+</node>
+<node id="REINFORCEMENT LEARNING PARADIGMS">
+  <data key="d0">TOPIC</data>
+  <data key="d1">Exploration of different paradigms in Reinforcement Learning, such as model-based and model-free approaches, discussing their pros and cons, applications, and limitations.</data>
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d3">[{"level": 0, "cluster": 9}, {"level": 1, "cluster": 15}]</data>
+</node>
+<node id="MODEL-BASED VS MODEL-FREE RL">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">A subtopic under Reinforcement Learning Paradigms examining differences in decision-making processes and optimal usage scenarios, aiming at a medium difficulty level with an analysis cognitive level.</data>
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d3">[{"level": 0, "cluster": 9}, {"level": 1, "cluster": 15}]</data>
+</node>
+<node id="MODEL-FREE RL">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">A methodology that does not explicitly model the environment, thus useful in situations with less structured data. Important for comparison with model-based methods.</data>
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+</node>
+<node id="POLICY EVALUATION">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">A subtopic under Reinforcement Learning Techniques focused on iterative computation of value functions given a policy, aiming at comprehension at a medium difficulty level.</data>
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d3">[{"level": 0, "cluster": 9}, {"level": 1, "cluster": 16}]</data>
+</node>
+<node id="MDP">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">An analytical framework for Reinforcement Learning using Markov properties aimed at explaining decision-making processes with application-oriented illustrations.</data>
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+</node>
+<node id="EXPLORATION STRATEGIES">
+  <data key="d0">TOPIC</data>
+  <data key="d1">Approaches in Reinforcement Learning targeting optimal decision making by balancing exploration and exploitation, including UCB Action Selection and k-armed bandit problem.</data>
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d3">[{"level": 0, "cluster": 5}]</data>
+</node>
+<node id="UCB ACTION SELECTION">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">A strategy under Exploration Strategies focusing on the formulaic approach for selecting actions with upper confidence bounds, involving analysis challenges.</data>
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d3">[{"level": 0, "cluster": 5}]</data>
+</node>
+<node id="K-ARMED BANDIT PROBLEM">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">A classical problem in Exploration Strategies that explores the exploration-exploitation balance, applicable across various practical domains.</data>
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d3">[{"level": 0, "cluster": 5}]</data>
+</node>
+<node id="QUESTION L (B)">
+  <data key="d0">QUESTION</data>
+  <data key="d1">Compare SARSA and Q-learning, highlighting differences between on-policy and off-policy methods and provide an example - Medium difficulty, targeting analysis, worth 10 marks.</data>
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+</node>
+<node id="QUESTION 2 (A)">
+  <data key="d0">QUESTION</data>
+  <data key="d1">Differentiate between model-based and model-free types of Reinforcement Learning, discussing advantages and limitations with real-world examples - Medium difficulty, targeting analysis, worth 10 marks.</data>
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+</node>
+<node id="QUESTION 2 (B)">
+  <data key="d0">QUESTION</data>
+  <data key="d1">Discuss Iterative Policy Evaluation with an example - Medium difficulty, targeting comprehension, worth 10 marks.</data>
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+</node>
+<node id="QUESTION 3 (A)">
+  <data key="d0">QUESTION</data>
+  <data key="d1">Explain Markov properties and formulate an MDP scenario - Hard difficulty, targeting application, worth 10 marks.</data>
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+</node>
+<node id="QUESTION 3 (B)">
+  <data key="d0">QUESTION</data>
+  <data key="d1">Explore UCB Action Selection in multi-armed bandits - Hard difficulty, targeting analysis, worth 10 marks.</data>
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+</node>
+<node id="QUESTION 4 (A)">
+  <data key="d0">QUESTION</data>
+  <data key="d1">Discuss the k-armed bandit problem focusing on exploration-exploitation trade-offs, and practical applications - Medium difficulty, targeting analysis, worth 10 marks.</data>
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+</node>
+<node id="QUESTION 4 (B)">
+  <data key="d0">QUESTION</data>
+  <data key="d1">Describe Monte Carlo Prediction in Reinforcement Learning with pseudocode and discuss advantages over DP in blackjack - Medium difficulty, targeting application, worth 10 marks.</data>
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+</node>
+<node id="HARD">
+  <data key="d0">DIFFICULTY_LEVEL</data>
+  <data key="d1">A level of difficulty that requires design and evaluative skills.&lt;SEP&gt;Represents the complexity level of some questions in the document, requiring an in-depth understanding and application of concepts.</data>
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1&lt;SEP&gt;chunk-31aa9c841d724e7a958338c15575adcb</data>
+</node>
+<node id="MEDIUM">
+  <data key="d0">DIFFICULTY_LEVEL</data>
+  <data key="d1">A level of difficulty that requires comprehension and analytical skills.&lt;SEP&gt;Represents the moderate complexity level of some questions in the document, needing analytical skills and understanding.</data>
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1&lt;SEP&gt;chunk-31aa9c841d724e7a958338c15575adcb</data>
+</node>
+<node id="COMPREHENSION">
+  <data key="d0">COGNITIVE_LEVEL</data>
+  <data key="d1">A cognitive level that requires understanding and interpreting information.</data>
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+</node>
+<node id="ANALYSIS">
+  <data key="d0">COGNITIVE_LEVEL</data>
+  <data key="d1">A cognitive level that involves breaking down information into parts to understand its structure and derivations.</data>
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+</node>
+<node id="APPLICATION">
+  <data key="d0">COGNITIVE_LEVEL</data>
+  <data key="d1">A cognitive level that requires the use of information in new situations, demonstrating practical application of concepts.</data>
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+</node>
+<node id="REINFORCEMENT LEARNING QUESTION PAPER">
+  <data key="d0">QUESTION_PAPER</data>
+  <data key="d1">A collection of questions on Reinforcement Learning designed to assess knowledge across various topics, difficulty levels, and cognitive domains.</data>
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+</node>
+<node id="REINFORCEMENT LEARNING TECHNIQUES">
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d1">is a subtopic of</data>
+  <data key="d0">"UNKNOWN"</data>
+  <data key="d3">[{"level": 0, "cluster": 9}, {"level": 1, "cluster": 16}]</data>
+</node>
+<node id="FUNDAMENTALS OF REINFORCEMENT LEARNING">
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d1">is a subtopic of</data>
+  <data key="d0">"UNKNOWN"</data>
+  <data key="d3">[{"level": 0, "cluster": 7}]</data>
+</node>
+<node id="Q. L (B) COMPARE SARSA AND Q-LEARNING">
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d1">is about</data>
+  <data key="d0">"UNKNOWN"</data>
+  <data key="d3">[{"level": 0, "cluster": 10}, {"level": 1, "cluster": 19}]</data>
+</node>
+<node id="Q.2 (A) DIFFERENTIATE BETWEEN MODEL-BASED AND MODEL-FREE RL">
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d1">is about</data>
+  <data key="d0">"UNKNOWN"</data>
+  <data key="d3">[{"level": 0, "cluster": 9}, {"level": 1, "cluster": 15}]</data>
+</node>
+<node id="Q.2 (B) DISCUSS THE ITERATIVE POLICY EVALUATION">
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d1">is about</data>
+  <data key="d0">"UNKNOWN"</data>
+  <data key="d3">[{"level": 0, "cluster": 9}, {"level": 1, "cluster": 16}]</data>
+</node>
+<node id="Q.3 (A) EXPLAIN THE MARKOV PROPERTIES">
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d1">is about</data>
+  <data key="d0">"UNKNOWN"</data>
+  <data key="d3">[{"level": 0, "cluster": 7}]</data>
+</node>
+<node id="Q.3 (B) EXPLORE UCB ACTION SELECTION">
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d1">is about</data>
+  <data key="d0">"UNKNOWN"</data>
+  <data key="d3">[{"level": 0, "cluster": 5}]</data>
+</node>
+<node id="Q.4 (A) DISCUSS THE K-ARMED BANDIT PROBLEM">
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d1">is about</data>
+  <data key="d0">"UNKNOWN"</data>
+  <data key="d3">[{"level": 0, "cluster": 5}]</data>
+</node>
+<node id="Q.4 (B) DESCRIBE THE CONCEPT OF MONTE CARLO PREDICTION">
+  <data key="d2">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d1">is about</data>
+  <data key="d0">"UNKNOWN"</data>
+  <data key="d3">[{"level": 0, "cluster": 10}, {"level": 1, "cluster": 18}]</data>
+</node>
+<node id="POLICY AND VALUE FUNCTIONS IN REINFORCEMENT LEARNING">
+  <data key="d0">TOPIC</data>
+  <data key="d1">This topic covers the theories and methods involved in evaluating and improving policies in reinforcement learning.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d3">[{"level": 0, "cluster": 8}]</data>
+</node>
+<node id="POLICY IMPROVEMENT THEOREM AND COMPARISON OF LEARNING METHODS">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">Subtopic focusing on the Policy Improvement Theorem and comparing methods such as SARSA and Q-learning in reinforcement learning.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d3">[{"level": 0, "cluster": 8}]</data>
+</node>
+<node id="EXPLAIN THE POLICY IMPROVEMENT THEOREM IN THE CONTEXT OF REINFORCEMENT LEARNING... [10 MARKS]">
+  <data key="d0">QUESTION</data>
+  <data key="d1">Explain the Policy Improvement Theorem in the context of Reinforcement Learning. Describe the fundamental principle behind the theorem and its proof. Discuss the implications of the theorem on the iterative process of policy iteration.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d3">[{"level": 0, "cluster": 8}]</data>
+</node>
+<node id="COMPARE SARSA AND Q-LEARNING... [10 MARKS]">
+  <data key="d0">QUESTION</data>
+  <data key="d1">Compare SARSA and Q-learning, highlighting the difference between on-policy and off-policy methods. Provide a suitable example.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d3">[{"level": 0, "cluster": 8}]</data>
+</node>
+<node id="TYPES OF REINFORCEMENT LEARNING">
+  <data key="d0">TOPIC</data>
+  <data key="d1">This topic delves into the different types of reinforcement learning models, specifically model-based and model-free RL and their evaluations.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d3">[{"level": 0, "cluster": 9}, {"level": 1, "cluster": 14}]</data>
+</node>
+<node id="MODEL-BASED VS MODEL-FREE RL AND POLICY EVALUATION">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">Subtopic comparing model-based and model-free reinforcement learning approaches and discussing policy evaluation methods.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d3">[{"level": 0, "cluster": 9}, {"level": 1, "cluster": 14}]</data>
+</node>
+<node id="DIFFERENTIATE BETWEEN MODEL-BASED AND MODEL-FREE TYPES OF REINFORCEMENT LEARNING... [10 MARKS]">
+  <data key="d0">QUESTION</data>
+  <data key="d1">Differentiate between model-based and model-free types of Reinforcement Learning (RL). Discuss the advantages and limitations of each approach, providing real-world examples where each type would be most suitable.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d3">[{"level": 0, "cluster": 9}, {"level": 1, "cluster": 14}]</data>
+</node>
+<node id="DISCUSS THE ITERATIVE POLICY EVALUATION... [10 MARKS]">
+  <data key="d0">QUESTION</data>
+  <data key="d1">Discuss the Iterative Policy Evaluation with the help of a suitable example.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d3">[{"level": 0, "cluster": 9}, {"level": 1, "cluster": 14}]</data>
+</node>
+<node id="FUNDAMENTAL CONCEPTS IN REINFORCEMENT LEARNING">
+  <data key="d0">TOPIC</data>
+  <data key="d1">This topic explains the foundational elements in reinforcement learning, like Markov Decision Processes and action selection strategies.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d3">[{"level": 0, "cluster": 6}]</data>
+</node>
+<node id="MARKOV DECISION PROCESSES AND ACTION SELECTION STRATEGIES">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">Subtopic covering the Markov properties in MDPs and examining strategies for action selection, such as UCB in multi-armed bandits.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d3">[{"level": 0, "cluster": 6}]</data>
+</node>
+<node id="EXPLAIN THE MARKOV PROPERTIES AND THEIR ROLE IN CONSTRUCTING MDPS... [10 MARKS]">
+  <data key="d0">QUESTION</data>
+  <data key="d1">Explain the Markov properties and their role in constructing Markov Decision Processes (MDPs) in Reinforcement Learning. Formulate an MDP scenario depicting a bot collecting empty soda cans in an office environment as an illustration of how Markov properties are applied to model complex decision-making tasks.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d3">[{"level": 0, "cluster": 6}]</data>
+</node>
+<node id="EXPLORE UPPER-CONFIDENCE-BOUND (UCB) ACTION SELECTION IN MULTI-ARMED BANDITS... [10 MARKS]">
+  <data key="d0">QUESTION</data>
+  <data key="d1">Explore Upper-Confidence-Bound (UCB) Action Selection in multi-armed bandits. Analyze UCB's formula and address potential application challenges.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d3">[{"level": 0, "cluster": 6}]</data>
+</node>
+<node id="EXPLORATION-EXPLOITATION IN REINFORCEMENT LEARNING">
+  <data key="d0">TOPIC</data>
+  <data key="d1">This topic looks at the balance between exploring new possibilities and exploiting known resources in reinforcement learning, with a focus on bandit problems and Monte Carlo methods.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d3">[{"level": 0, "cluster": 4}]</data>
+</node>
+<node id="MULTI-ARMED BANDITS AND MONTE CARLO METHODS">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">Subtopic discussing the k-armed bandit problem and Monte Carlo prediction methods.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d3">[{"level": 0, "cluster": 4}]</data>
+</node>
+<node id="DISCUSS THE K-ARMED BANDIT PROBLEM, FOCUSING ON EXPLORATION-EXPLOITATION TRADE-OFFS... [10 MARKS]">
+  <data key="d0">QUESTION</data>
+  <data key="d1">Discuss the k-armed bandit problem, focusing on exploration-exploitation trade-offs. Discuss four practical applications of the k-armed bandit problem across different domains, showcasing its adaptability in optimizing decision-making processes.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d3">[{"level": 0, "cluster": 4}]</data>
+</node>
+<node id="DESCRIBE THE CONCEPT OF MONTE CARLO PREDICTION IN REINFORCEMENT LEARNING... [10 MARKS]">
+  <data key="d0">QUESTION</data>
+  <data key="d1">Describe the concept of Monte Carlo Prediction in Reinforcement Learning. Write the pseudocode for first-visit Monte Carlo Prediction. Discuss the advantage of employing Monte Carlo methods over Dynamic Programming (DP) methods specifically in the context of the blackjack game.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d3">[{"level": 0, "cluster": 4}]</data>
+</node>
+<node id="APPLICATIONS AND THEORETICAL FOUNDATIONS IN REINFORCEMENT LEARNING">
+  <data key="d0">TOPIC</data>
+  <data key="d1">This topic addresses both the practical applications and the theoretical underpinnings in reinforcement learning, covering areas like dynamic allocation and core RL concepts.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d3">[{"level": 0, "cluster": 3}]</data>
+</node>
+<node id="DYNAMIC ALLOCATION AND FOUNDATIONS OF RL CONCEPTS">
+  <data key="d0">SUBTOPIC</data>
+  <data key="d1">Subtopic involving the design and evaluation of RL algorithms for dynamic allocation tasks and evaluating fundamental concepts like goals and rewards.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d3">[{"level": 0, "cluster": 3}]</data>
+</node>
+<node id="DESIGN A REINFORCEMENT LEARNING ALGORITHM TO OPTIMIZE DYNAMIC CHANNEL ALLOCATION... [10 MARKS]">
+  <data key="d0">QUESTION</data>
+  <data key="d1">Design a Reinforcement Learning algorithm to optimize Dynamic Channel Allocation in a wireless communication network. Provide the state representation, action space, reward function, and exploration strategy. Discuss any one potential challenge in implementing such an algorithm in a real-world scenario.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d3">[{"level": 0, "cluster": 3}]</data>
+</node>
+<node id="IN THE CONTEXT OF REINFORCEMENT LEARNING, EVALUATE THE CONCEPTS OF GOALS, REWARDS, RETURNS... [10 MARKS]">
+  <data key="d0">QUESTION</data>
+  <data key="d1">In the context of reinforcement learning evaluate the concepts of Goals, Rewards, Returns, Episodes, and Discounting. Discuss the conventional representations and mathematical formulations associated with Goals, Rewards, Returns, Episodes, and Discounting.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d3">[{"level": 0, "cluster": 3}]</data>
+</node>
+<node id="VIII">
+  <data key="d0">QUESTION_PAPER</data>
+  <data key="d1">Exam Details for Year: 2024, Semester: VIII, Subject: Reinforcement Learning. Total Marks: 60, Duration: 2 hours.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+</node>
+<node id="2024">
+  <data key="d0">QUESTION_PAPER</data>
+  <data key="d1">Exam Year: 2024 for Reinforcement Learning subject in Semester VIII.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+</node>
+<node id="COMPREHENSION AND ANALYSIS">
+  <data key="d0">COGNITIVE_LEVEL</data>
+  <data key="d1">Involves understanding the material and breaking it down into components to analyze its structure.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+</node>
+<node id="ANALYSIS AND APPLICATION">
+  <data key="d0">COGNITIVE_LEVEL</data>
+  <data key="d1">Engaging with material to perform analyses and apply knowledge to solve problems.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+</node>
+<node id="DESIGN AND EVALUATION">
+  <data key="d0">COGNITIVE_LEVEL</data>
+  <data key="d1">Creating new solutions and evaluating their effectiveness and efficiency.</data>
+  <data key="d2">chunk-31aa9c841d724e7a958338c15575adcb</data>
+</node>
+<edge source="ADDO8013 REINFORCEMENT LEARNING" target="INTRODUCTION TO REINFORCEMENT LEARNING">
+  <data key="d4">9.0</data>
+  <data key="d5">"is a topic of"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="ADDO8013 REINFORCEMENT LEARNING" target="BANDIT PROBLEMS AND ONLINE LEARNING">
+  <data key="d4">9.0</data>
+  <data key="d5">"is a topic of"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="ADDO8013 REINFORCEMENT LEARNING" target="MARKOV DECISION PROCESSES">
+  <data key="d4">9.0</data>
+  <data key="d5">"is a topic of"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="ADDO8013 REINFORCEMENT LEARNING" target="DYNAMIC PROGRAMMING">
+  <data key="d4">9.0</data>
+  <data key="d5">"is a topic of"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="ADDO8013 REINFORCEMENT LEARNING" target="MONTE CARLO METHODS AND TEMPORAL-DIFFERENCE LEARNING">
+  <data key="d4">9.0</data>
+  <data key="d5">"is a topic of"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="ADDO8013 REINFORCEMENT LEARNING" target="APPLICATIONS AND CASE STUDIES">
+  <data key="d4">9.0</data>
+  <data key="d5">"is a topic of"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="ADDO8013 REINFORCEMENT LEARNING" target="REINFORCEMENT LEARNING: AN INTRODUCTION, BY RICHARD S. SUTTON AND ANDREW G. BARTO">
+  <data key="d4">7.0</data>
+  <data key="d5">"references"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="ADDO8013 REINFORCEMENT LEARNING" target="THE REINFORCEMENT LEARNING WORKSHOP: LEARN HOW TO APPLY CUTTING-EDGE REINFORCEMENT LEARNING ALGORITHMS TO A WIDE RANGE OF CONTROL PROBLEMS, 2020, PACKT PUBLISHING">
+  <data key="d4">7.0</data>
+  <data key="d5">"references"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="ADDO8013 REINFORCEMENT LEARNING" target="REINFORCEMENT LEARNING INDUSTRIAL APPLICATIONS WITH INTELLIGENT AGENTS, O’REILLY">
+  <data key="d4">7.0</data>
+  <data key="d5">"references"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="ADDO8013 REINFORCEMENT LEARNING" target="PRACTICAL REINFORCEMENT LEARNING, PACKT PUBLISHING, 2017">
+  <data key="d4">7.0</data>
+  <data key="d5">"references"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="INTRODUCTION TO REINFORCEMENT LEARNING" target="REINFORCEMENT LEARNING ALGORITHMS">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="REINFORCEMENT LEARNING ALGORITHMS" target="SARSA VS Q-LEARNING">
+  <data key="d4">9.0</data>
+  <data key="d5">is a subtopic of</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="REINFORCEMENT LEARNING ALGORITHMS" target="MONTE CARLO METHODS">
+  <data key="d4">9.0</data>
+  <data key="d5">is a subtopic of</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="REINFORCEMENT LEARNING ALGORITHMS" target="REINFORCEMENT LEARNING">
+  <data key="d4">10.0</data>
+  <data key="d5">is a topic of</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="BANDIT PROBLEMS AND ONLINE LEARNING" target="AN N-ARMED BANDIT PROBLEM">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="BANDIT PROBLEMS AND ONLINE LEARNING" target="ACTION-VALUE METHODS">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="BANDIT PROBLEMS AND ONLINE LEARNING" target="OPTIMISTIC INITIAL VALUES">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="BANDIT PROBLEMS AND ONLINE LEARNING" target="UPPER-CONFIDENCE-BOUND ACTION SELECTION">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="BANDIT PROBLEMS AND ONLINE LEARNING" target="GRADIENT BANDITS">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="MARKOV DECISION PROCESSES" target="THE AGENT–ENVIRONMENT INTERFACE">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="MARKOV DECISION PROCESSES" target="GOALS AND REWARDS">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="MARKOV DECISION PROCESSES" target="RETURNS AND MARKOV PROPERTIES">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="MARKOV DECISION PROCESSES" target="MARKOV DECISION PROCESS">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="MARKOV DECISION PROCESSES" target="VALUE FUNCTIONS AND OPTIMAL VALUE FUNCTIONS">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="MARKOV DECISION PROCESSES" target="FUNDAMENTALS OF REINFORCEMENT LEARNING">
+  <data key="d4">10.0</data>
+  <data key="d5">is a subtopic of</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="MARKOV DECISION PROCESSES" target="Q.3 (A) EXPLAIN THE MARKOV PROPERTIES">
+  <data key="d4">10.0</data>
+  <data key="d5">is about</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="DYNAMIC PROGRAMMING" target="POLICY EVALUATION (PREDICTION)">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="DYNAMIC PROGRAMMING" target="POLICY IMPROVEMENT">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="DYNAMIC PROGRAMMING" target="POLICY ITERATION">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="DYNAMIC PROGRAMMING" target="VALUE ITERATION">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="DYNAMIC PROGRAMMING" target="ASYNCHRONOUS DYNAMIC PROGRAMMING">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="DYNAMIC PROGRAMMING" target="GENERALIZED POLICY ITERATION">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="POLICY ITERATION" target="REINFORCEMENT LEARNING THEORY">
+  <data key="d4">8.0</data>
+  <data key="d5">is a subtopic of</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="MONTE CARLO METHODS AND TEMPORAL-DIFFERENCE LEARNING" target="MONTE CARLO PREDICTION">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="MONTE CARLO METHODS AND TEMPORAL-DIFFERENCE LEARNING" target="MONTE CARLO ESTIMATION OF ACTION VALUES">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="MONTE CARLO METHODS AND TEMPORAL-DIFFERENCE LEARNING" target="MONTE CARLO CONTROL">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="MONTE CARLO METHODS AND TEMPORAL-DIFFERENCE LEARNING" target="TD PREDICTION">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="MONTE CARLO METHODS AND TEMPORAL-DIFFERENCE LEARNING" target="TD CONTROL USING Q-LEARNING">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="MONTE CARLO PREDICTION" target="MONTE CARLO METHODS">
+  <data key="d4">8.0</data>
+  <data key="d5">is a subtopic of</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="MONTE CARLO PREDICTION" target="Q.4 (B) DESCRIBE THE CONCEPT OF MONTE CARLO PREDICTION">
+  <data key="d4">8.0</data>
+  <data key="d5">is about</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="APPLICATIONS AND CASE STUDIES" target="ELEVATOR DISPATCHING">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="APPLICATIONS AND CASE STUDIES" target="DYNAMIC CHANNEL ALLOCATION">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="APPLICATIONS AND CASE STUDIES" target="JOB-SHOP SCHEDULING">
+  <data key="d4">8.0</data>
+  <data key="d5">"has subtopic"</data>
+  <data key="d6">chunk-5e54a0db75e608a382c1ce071f140ac3</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="REINFORCEMENT LEARNING" target="REINFORCEMENT LEARNING THEORY">
+  <data key="d4">10.0</data>
+  <data key="d5">is a topic of</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="REINFORCEMENT LEARNING" target="REINFORCEMENT LEARNING PARADIGMS">
+  <data key="d4">10.0</data>
+  <data key="d5">is a topic of</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="REINFORCEMENT LEARNING" target="REINFORCEMENT LEARNING TECHNIQUES">
+  <data key="d4">10.0</data>
+  <data key="d5">is a topic of</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="REINFORCEMENT LEARNING" target="FUNDAMENTALS OF REINFORCEMENT LEARNING">
+  <data key="d4">10.0</data>
+  <data key="d5">is a topic of</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="REINFORCEMENT LEARNING" target="EXPLORATION STRATEGIES">
+  <data key="d4">10.0</data>
+  <data key="d5">is a topic of</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="REINFORCEMENT LEARNING" target="POLICY AND VALUE FUNCTIONS IN REINFORCEMENT LEARNING">
+  <data key="d4">8.0</data>
+  <data key="d5">is a topic related to</data>
+  <data key="d6">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="REINFORCEMENT LEARNING" target="TYPES OF REINFORCEMENT LEARNING">
+  <data key="d4">8.0</data>
+  <data key="d5">is a topic related to</data>
+  <data key="d6">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="REINFORCEMENT LEARNING" target="FUNDAMENTAL CONCEPTS IN REINFORCEMENT LEARNING">
+  <data key="d4">8.0</data>
+  <data key="d5">is a topic related to</data>
+  <data key="d6">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="REINFORCEMENT LEARNING" target="EXPLORATION-EXPLOITATION IN REINFORCEMENT LEARNING">
+  <data key="d4">8.0</data>
+  <data key="d5">is a topic related to</data>
+  <data key="d6">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="REINFORCEMENT LEARNING" target="APPLICATIONS AND THEORETICAL FOUNDATIONS IN REINFORCEMENT LEARNING">
+  <data key="d4">8.0</data>
+  <data key="d5">is a topic related to</data>
+  <data key="d6">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="SARSA VS Q-LEARNING" target="Q. L (B) COMPARE SARSA AND Q-LEARNING">
+  <data key="d4">9.0</data>
+  <data key="d5">is about</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="REINFORCEMENT LEARNING PARADIGMS" target="MODEL-BASED VS MODEL-FREE RL">
+  <data key="d4">9.0</data>
+  <data key="d5">is a subtopic of</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="MODEL-BASED VS MODEL-FREE RL" target="Q.2 (A) DIFFERENTIATE BETWEEN MODEL-BASED AND MODEL-FREE RL">
+  <data key="d4">9.0</data>
+  <data key="d5">is about</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="POLICY EVALUATION" target="REINFORCEMENT LEARNING TECHNIQUES">
+  <data key="d4">8.0</data>
+  <data key="d5">is a subtopic of</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="POLICY EVALUATION" target="Q.2 (B) DISCUSS THE ITERATIVE POLICY EVALUATION">
+  <data key="d4">8.0</data>
+  <data key="d5">is about</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="EXPLORATION STRATEGIES" target="UCB ACTION SELECTION">
+  <data key="d4">9.0</data>
+  <data key="d5">is a subtopic of</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="EXPLORATION STRATEGIES" target="K-ARMED BANDIT PROBLEM">
+  <data key="d4">9.0</data>
+  <data key="d5">is a subtopic of</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="UCB ACTION SELECTION" target="Q.3 (B) EXPLORE UCB ACTION SELECTION">
+  <data key="d4">9.0</data>
+  <data key="d5">is about</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="K-ARMED BANDIT PROBLEM" target="Q.4 (A) DISCUSS THE K-ARMED BANDIT PROBLEM">
+  <data key="d4">9.0</data>
+  <data key="d5">is about</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="QUESTION L (B)" target="REINFORCEMENT LEARNING QUESTION PAPER">
+  <data key="d4">10.0</data>
+  <data key="d5">appears in</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="QUESTION L (B)" target="MEDIUM">
+  <data key="d4">9.0</data>
+  <data key="d5">has a difficulty level</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="QUESTION L (B)" target="ANALYSIS">
+  <data key="d4">9.0</data>
+  <data key="d5">has a cognitive level</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="QUESTION 2 (A)" target="REINFORCEMENT LEARNING QUESTION PAPER">
+  <data key="d4">10.0</data>
+  <data key="d5">appears in</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="QUESTION 2 (A)" target="MEDIUM">
+  <data key="d4">9.0</data>
+  <data key="d5">has a difficulty level</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="QUESTION 2 (A)" target="ANALYSIS">
+  <data key="d4">9.0</data>
+  <data key="d5">has a cognitive level</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="QUESTION 2 (B)" target="REINFORCEMENT LEARNING QUESTION PAPER">
+  <data key="d4">10.0</data>
+  <data key="d5">appears in</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="QUESTION 2 (B)" target="MEDIUM">
+  <data key="d4">8.0</data>
+  <data key="d5">has a difficulty level</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="QUESTION 2 (B)" target="COMPREHENSION">
+  <data key="d4">8.0</data>
+  <data key="d5">has a cognitive level</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="QUESTION 3 (A)" target="REINFORCEMENT LEARNING QUESTION PAPER">
+  <data key="d4">10.0</data>
+  <data key="d5">appears in</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="QUESTION 3 (A)" target="HARD">
+  <data key="d4">10.0</data>
+  <data key="d5">has a difficulty level</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="QUESTION 3 (A)" target="APPLICATION">
+  <data key="d4">10.0</data>
+  <data key="d5">has a cognitive level</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="QUESTION 3 (B)" target="REINFORCEMENT LEARNING QUESTION PAPER">
+  <data key="d4">10.0</data>
+  <data key="d5">appears in</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="QUESTION 3 (B)" target="HARD">
+  <data key="d4">9.0</data>
+  <data key="d5">has a difficulty level</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="QUESTION 3 (B)" target="ANALYSIS">
+  <data key="d4">9.0</data>
+  <data key="d5">has a cognitive level</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="QUESTION 4 (A)" target="REINFORCEMENT LEARNING QUESTION PAPER">
+  <data key="d4">10.0</data>
+  <data key="d5">appears in</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="QUESTION 4 (A)" target="MEDIUM">
+  <data key="d4">9.0</data>
+  <data key="d5">has a difficulty level</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="QUESTION 4 (A)" target="ANALYSIS">
+  <data key="d4">9.0</data>
+  <data key="d5">has a cognitive level</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="QUESTION 4 (B)" target="REINFORCEMENT LEARNING QUESTION PAPER">
+  <data key="d4">10.0</data>
+  <data key="d5">appears in</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="QUESTION 4 (B)" target="MEDIUM">
+  <data key="d4">8.0</data>
+  <data key="d5">has a difficulty level</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="QUESTION 4 (B)" target="APPLICATION">
+  <data key="d4">8.0</data>
+  <data key="d5">has a cognitive level</data>
+  <data key="d6">chunk-312b45904d3587796a9473ebd66e30d1</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="POLICY AND VALUE FUNCTIONS IN REINFORCEMENT LEARNING" target="POLICY IMPROVEMENT THEOREM AND COMPARISON OF LEARNING METHODS">
+  <data key="d4">9.0</data>
+  <data key="d5">is a subtopic of</data>
+  <data key="d6">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="POLICY IMPROVEMENT THEOREM AND COMPARISON OF LEARNING METHODS" target="EXPLAIN THE POLICY IMPROVEMENT THEOREM IN THE CONTEXT OF REINFORCEMENT LEARNING... [10 MARKS]">
+  <data key="d4">8.0</data>
+  <data key="d5">is a question about</data>
+  <data key="d6">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="POLICY IMPROVEMENT THEOREM AND COMPARISON OF LEARNING METHODS" target="COMPARE SARSA AND Q-LEARNING... [10 MARKS]">
+  <data key="d4">8.0</data>
+  <data key="d5">is a question about</data>
+  <data key="d6">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="TYPES OF REINFORCEMENT LEARNING" target="MODEL-BASED VS MODEL-FREE RL AND POLICY EVALUATION">
+  <data key="d4">9.0</data>
+  <data key="d5">is a subtopic of</data>
+  <data key="d6">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="MODEL-BASED VS MODEL-FREE RL AND POLICY EVALUATION" target="DIFFERENTIATE BETWEEN MODEL-BASED AND MODEL-FREE TYPES OF REINFORCEMENT LEARNING... [10 MARKS]">
+  <data key="d4">8.0</data>
+  <data key="d5">is a question about</data>
+  <data key="d6">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="MODEL-BASED VS MODEL-FREE RL AND POLICY EVALUATION" target="DISCUSS THE ITERATIVE POLICY EVALUATION... [10 MARKS]">
+  <data key="d4">8.0</data>
+  <data key="d5">is a question about</data>
+  <data key="d6">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="FUNDAMENTAL CONCEPTS IN REINFORCEMENT LEARNING" target="MARKOV DECISION PROCESSES AND ACTION SELECTION STRATEGIES">
+  <data key="d4">9.0</data>
+  <data key="d5">is a subtopic of</data>
+  <data key="d6">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="MARKOV DECISION PROCESSES AND ACTION SELECTION STRATEGIES" target="EXPLAIN THE MARKOV PROPERTIES AND THEIR ROLE IN CONSTRUCTING MDPS... [10 MARKS]">
+  <data key="d4">8.0</data>
+  <data key="d5">is a question about</data>
+  <data key="d6">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="MARKOV DECISION PROCESSES AND ACTION SELECTION STRATEGIES" target="EXPLORE UPPER-CONFIDENCE-BOUND (UCB) ACTION SELECTION IN MULTI-ARMED BANDITS... [10 MARKS]">
+  <data key="d4">8.0</data>
+  <data key="d5">is a question about</data>
+  <data key="d6">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="EXPLORATION-EXPLOITATION IN REINFORCEMENT LEARNING" target="MULTI-ARMED BANDITS AND MONTE CARLO METHODS">
+  <data key="d4">9.0</data>
+  <data key="d5">is a subtopic of</data>
+  <data key="d6">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="MULTI-ARMED BANDITS AND MONTE CARLO METHODS" target="DISCUSS THE K-ARMED BANDIT PROBLEM, FOCUSING ON EXPLORATION-EXPLOITATION TRADE-OFFS... [10 MARKS]">
+  <data key="d4">8.0</data>
+  <data key="d5">is a question about</data>
+  <data key="d6">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="MULTI-ARMED BANDITS AND MONTE CARLO METHODS" target="DESCRIBE THE CONCEPT OF MONTE CARLO PREDICTION IN REINFORCEMENT LEARNING... [10 MARKS]">
+  <data key="d4">8.0</data>
+  <data key="d5">is a question about</data>
+  <data key="d6">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="APPLICATIONS AND THEORETICAL FOUNDATIONS IN REINFORCEMENT LEARNING" target="DYNAMIC ALLOCATION AND FOUNDATIONS OF RL CONCEPTS">
+  <data key="d4">9.0</data>
+  <data key="d5">is a subtopic of</data>
+  <data key="d6">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="DYNAMIC ALLOCATION AND FOUNDATIONS OF RL CONCEPTS" target="DESIGN A REINFORCEMENT LEARNING ALGORITHM TO OPTIMIZE DYNAMIC CHANNEL ALLOCATION... [10 MARKS]">
+  <data key="d4">8.0</data>
+  <data key="d5">is a question about</data>
+  <data key="d6">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d7">1</data>
+</edge>
+<edge source="DYNAMIC ALLOCATION AND FOUNDATIONS OF RL CONCEPTS" target="IN THE CONTEXT OF REINFORCEMENT LEARNING, EVALUATE THE CONCEPTS OF GOALS, REWARDS, RETURNS... [10 MARKS]">
+  <data key="d4">8.0</data>
+  <data key="d5">is a question about</data>
+  <data key="d6">chunk-31aa9c841d724e7a958338c15575adcb</data>
+  <data key="d7">1</data>
+</edge>
+</graph></graphml>
