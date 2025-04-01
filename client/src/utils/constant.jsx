@@ -11,7 +11,7 @@ export const UICard01 = [
         icon: <BarChart2 className="w-12 h-12 text-purple-600" />,
         title: "Analytics Dashboard",
         description:
-            "Gain valuable insights into question quality, coverage of syllabus topics, and alignment with Bloom's taxonomy levels through our intuitive analytics.",
+            "Gain valuable insights into question quality, coverage of Syllabus topics, and alignment with Bloom's taxonomy levels through our intuitive analytics.",
     },
     {
         icon: <Shield className="w-12 h-12 text-blue-600" />,
@@ -51,7 +51,7 @@ export const UICard02 = [
 export const UICard03 = [
     {
         question: "How does the AI ensure pedagogical quality of questions?",
-        answer: "Our AI is trained on educational frameworks including Bloom's taxonomy and integrates with syllabus structures to generate questions that target specific learning outcomes and cognitive levels.",
+        answer: "Our AI is trained on educational frameworks including Bloom's taxonomy and integrates with Syllabus structures to generate questions that target specific learning outcomes and cognitive levels.",
     },
         {
             question: "Can I customize the assessment format and difficulty?",

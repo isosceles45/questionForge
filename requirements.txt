@@ -7,4 +7,5 @@ langchain-groq
 python-dotenv
 pdfplumber
 yagmail
-neo4j
+python-multipart
+pydantic[email]

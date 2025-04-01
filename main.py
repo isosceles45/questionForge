@@ -1,15 +1,19 @@
-from fastapi import FastAPI, HTTPException, UploadFile, File, Query
+from fastapi import FastAPI, HTTPException, UploadFile, File, Query, Body
 import pdfplumber
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
-from pydantic import ValidationError, EmailStr
+from pydantic import ValidationError, EmailStr, BaseModel
 from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.output_parsers import PydanticOutputParser
 import io
 from dotenv import load_dotenv
-import yagmail
+import os
+from typing import Optional
+from openai import AsyncOpenAI  # Using AsyncOpenAI
+from nano_graphrag import GraphRAG, QueryParam
+
 from question_pipeline.models import (
     MCQList, FIBList, ShortAnswerList, LongAnswerList,
     QuestionRequest
@@ -18,6 +22,95 @@ from question_pipeline.prompts import MCQ_TEMPLATE, FIB_TEMPLATE, SHORT_ANSWER_T
 
 # Load environment variables
 load_dotenv()
+
+# Initialize GraphRAG - ensure the Graph directory exists
+GRAPH_DIR = "graph_rag/Graph"
+os.makedirs(GRAPH_DIR, exist_ok=True)
+graph_rag = GraphRAG(working_dir=GRAPH_DIR)
+
+# System prompts for processing syllabus and PYQ content
+SYLLABUS_PROMPT = """
+# Task
+You are an expert education analyst extracting structured information from a course Syllabus. Your task is to identify and extract the hierarchical structure of topics and subtopics from this Syllabus document.
+
+## Instructions
+- Carefully read the provided Syllabus document
+- Extract the hierarchical structure of topics and subtopics
+- Preserve ALL original organization, numbering schemes, and formatting
+- Include EVERY detail about each topic - do not summarize or omit information
+- Preserve all learning objectives or outcomes associated with topics
+- Include all reference books, materials, or resources mentioned
+- DO NOT miss any detail from the original document, no matter how minor it seems
+
+## Response Format
+Respond with a clear, structured text format:
+
+SUBJECT: [Course name and code]
+DESCRIPTION: [Full course description]
+
+TOPICS:
+1. [Topic Title]
+   Description: [Complete topic description with all details]
+   Learning Objectives: [All learning objectives for this topic]
+   
+   Subtopics:
+   1.1 [Subtopic Title]
+       [Full subtopic description with all details]
+   1.2 [Subtopic Title]
+       [Full subtopic description with all details]
+   ...
+
+2. [Topic Title]
+   ...
+
+REFERENCES:
+- [Reference 1]
+- [Reference 2]
+...
+
+## Important Note
+Do not summarize or condense information. Include EVERY detail from the original document.
+"""
+
+PYQ_PROMPT = """
+# Task
+You are an expert education analyst extracting questions from previous year question papers. Your task is to identify each question and classify it according to its topic and subtopic in the course Syllabus.
+
+## Instructions
+- Carefully read the provided question paper
+- Extract each question COMPLETELY, preserving all parts, sub-questions, and marks allocation
+- Include ALL text formatting, numbering, and special instructions from the original
+- Identify the most likely topic and subtopic from the Syllabus that each question relates to
+- Note the difficulty level, cognitive domain (knowledge, comprehension, application, analysis, etc.), and marks allocated
+- Do not omit ANY part of the question, including diagrams (describe them), formulas, or instructions
+
+## Response Format
+Respond with a clearly structured text format:
+
+EXAM DETAILS:
+Year: [YEAR]
+Semester: [SEMESTER]
+Subject: [SUBJECT_NAME]
+Total Marks: [TOTAL_MARKS]
+Duration: [DURATION]
+
+QUESTIONS:
+---------------------
+Question 1: [COMPLETE question text with ALL formatting preserved]
+Topic: [Related Topic]
+Subtopic: [Related Subtopic]
+Marks: [Marks]
+Difficulty: [Easy/Medium/Hard]
+Cognitive Level: [Knowledge/Comprehension/Application/Analysis/etc.]
+Question Type: [Short Answer/Long Answer/MCQ/etc.]
+---------------------
+
+Question 2: [COMPLETE question text with ALL formatting preserved]
+...
+
+## Important Note
+The extraction must be EXHAUSTIVE and COMPLETE. Don't miss any detail, instruction, or part of any question.
+"""
 
 app = FastAPI(title="Question Generator API")
 
@@ -30,22 +123,22 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize LLM instances with a currently supported model
+# Initialize AsyncOpenAI client
+client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+# Initialize LLM instances
 groq = ChatOpenAI(model="gpt-4o")
 
-# Function to send email
-def send_email(to_email, subject, body, attachments):
-    try:
-        yag = yagmail.SMTP("your-email@example.com", "your-password")  # Replace with real credentials
-        yag.send(to=to_email, subject=subject, contents=body, attachments=attachments)
-        print("Email sent successfully!")
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error sending email: {str(e)}")
+# Data model for the content save endpoint
+class ContentData(BaseModel):
+    user: EmailStr
+    syllabus: str
+    pyq: Optional[str] = None
 
 # Function to generate questions
 def generate_questions(request_data: dict, question_type: str = "mcq"):
     try:
-        # Choose the appropriate model and template based on question type and whether we have graph context
+        # Choose the appropriate model and template based on question type
         if question_type == "mcq":
             response_model = MCQList
             template = MCQ_TEMPLATE
@@ -92,15 +185,43 @@ def generate_questions(request_data: dict, question_type: str = "mcq"):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
 
+async def process_syllabus(syllabus_text: str):
+    """Process syllabus text with OpenAI and return structured content"""
+    try:
+        response = await client.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {"role": "system", "content": SYLLABUS_PROMPT},
+                {"role": "user", "content": syllabus_text}
+            ]
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        print(f"Error processing syllabus: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error processing syllabus: {str(e)}")
+
+async def process_pyq(pyq_text: str):
+    """Process PYQ text with OpenAI and return structured content"""
+    try:
+        response = await client.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {"role": "system", "content": PYQ_PROMPT},
+                {"role": "user", "content": pyq_text}
+            ]
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        print(f"Error processing PYQ: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error processing PYQ: {str(e)}")
+
 @app.get("/")
 async def root():
     return {"message": "Welcome to the Question Generator API"}
 
 @app.post("/upload/pdf")
 async def upload_pdf(file: UploadFile = File(...)):
-    """
-    Extract text directly from an uploaded PDF file without storing it locally.
-    """
+    """Extract text directly from an uploaded PDF file without storing it locally."""
     if not file.filename.endswith('.pdf'):
         raise HTTPException(status_code=400, detail="File must be a PDF")
 
@@ -122,6 +243,11 @@ async def upload_pdf(file: UploadFile = File(...)):
         if not text.strip():
             raise HTTPException(status_code=400, detail="No text found in PDF")
 
+        # Print the extracted text for debugging
+        print("===== EXTRACTED TEXT FROM PDF =====")
+        print(text[:500] + "..." if len(text) > 500 else text)
+        print("===================================")
+
         return {"text": text}
 
     except Exception as e:
@@ -130,51 +256,93 @@ async def upload_pdf(file: UploadFile = File(...)):
         await file.close()
         pdf_file.close()
 
-from pydantic import BaseModel, EmailStr
-from typing import Optional
-
-# Add this model for content saving
-class ContentData(BaseModel):
-    user: EmailStr
-    syllabus: str
-    pyq: Optional[str] = None
-
-# Add this endpoint after your existing endpoints
 @app.post("/content/save")
 async def save_content(data: ContentData):
     """
-    Save syllabus and optional PYQ content with user info.
-    This is a simplified endpoint that just prints the data.
+    Process and save syllabus and optional PYQ content directly to GraphRAG.
     """
     try:
-        # Print the received data
-        print("\n===== CONTENT SAVE REQUEST =====")
-        print(f"User: {data.user}")
-        print(f"Syllabus Length: {len(data.syllabus)} characters")
-        print(f"Syllabus Preview: {data.syllabus[:200]}...")
-
+        # Process syllabus (mandatory)
+        print(f"Processing syllabus content from user: {data.user}")
+        processed_syllabus = await process_syllabus(data.syllabus)
+        
+        # Add processed syllabus to GraphRAG with detailed error handling
+        try:
+            print("Attempting to insert syllabus into GraphRAG...")
+            print(f"Syllabus content type: {type(processed_syllabus)}")
+            print(f"Syllabus content length: {len(processed_syllabus)}")
+            print(f"First 100 chars: {processed_syllabus[:100]}...")
+            
+            # Use the async version of insert instead of the synchronous one
+            await graph_rag.ainsert(processed_syllabus)
+            print("✓ Syllabus added to GraphRAG")
+        except Exception as insert_err:
+            print(f"Error during syllabus insert: {str(insert_err)}")
+            print(f"Error type: {type(insert_err)}")
+            raise HTTPException(status_code=500, detail=f"Error inserting syllabus: {str(insert_err)}")
+        
+        # Process PYQ if provided
         if data.pyq:
-            print(f"PYQ Length: {len(data.pyq)} characters")
-            print(f"PYQ Preview: {data.pyq[:200]}...")
-        else:
-            print("No PYQ content provided")
-
-        print("=================================\n")
-
-        # In a real implementation, you would save to database here
-        # This is where you would add your graph database integration later
-
+            print("Processing PYQ content...")
+            processed_pyq = await process_pyq(data.pyq)
+            
+            # Add processed PYQ to GraphRAG using async method
+            try:
+                await graph_rag.ainsert(processed_pyq)
+                print("✓ PYQ added to GraphRAG")
+            except Exception as pyq_err:
+                print(f"Error during PYQ insert: {str(pyq_err)}")
+                # Continue even if PYQ insert fails, since syllabus is mandatory
+        
         return {
             "status": "success",
-            "message": "Content received and printed to console",
+            "message": "Content processed and added to knowledge graph",
             "data": {
                 "user": data.user,
-                "syllabus_length": len(data.syllabus),
-                "pyq_provided": data.pyq is not None
+                "syllabus_processed": True,
+                "pyq_processed": data.pyq is not None
             }
         }
     except Exception as e:
+        import traceback
+        traceback.print_exc()
+        print(f"Error in save_content: {str(e)}")
+        print(f"Error type: {type(e)}")
         raise HTTPException(status_code=500, detail=f"Error saving content: {str(e)}")
+    
+@app.post("/graph/query")
+async def query_graph(query: str = Body(..., embed=True), mode: str = Body("global", embed=True)):
+    """
+    Query the knowledge graph with the provided query string.
+    """
+    try:
+        # Always create a QueryParam object, regardless of mode
+        param = QueryParam(mode=mode)
+        
+        # Check if GraphRAG query is async or sync
+        if hasattr(graph_rag, 'aquery') and callable(graph_rag.aquery):
+            # If there's an async version, use it
+            result = await graph_rag.aquery(query, param=param)
+        else:
+            # Use synchronous version in a way that doesn't block the event loop
+            import asyncio
+            loop = asyncio.get_event_loop()
+            
+            # Run the synchronous method in a thread pool
+            result = await loop.run_in_executor(
+                None, lambda: graph_rag.query(query, param=param)
+            )
+        
+        return {
+            "status": "success", 
+            "result": result
+        }
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        print(f"Error in query_graph: {str(e)}")
+        print(f"Error type: {type(e)}")
+        raise HTTPException(status_code=500, detail=f"Error querying graph: {str(e)}")
 
 @app.post("/generate/mcq", response_model=MCQList)
 async def generate_mcq(request: QuestionRequest):
@@ -218,6 +386,42 @@ async def generate_long_answer(
         return generate_questions(request_dict, question_type="long")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/generate/paper")
+async def generate_paper(marks: int = Body(60, embed=True)):
+    """
+    Generate a complete question paper using the knowledge in GraphRAG.
+    """
+    try:
+        query = f"Create a {marks} Marks Question Paper using your knowledge of syllabus and PYQs"
+        
+        # Always create a QueryParam object with "global" mode
+        param = QueryParam(mode="global")
+        
+        # Check if GraphRAG query is async or sync
+        if hasattr(graph_rag, 'aquery') and callable(graph_rag.aquery):
+            # If there's an async version, use it
+            result = await graph_rag.aquery(query, param=param)
+        else:
+            # Use synchronous version in a way that doesn't block the event loop
+            import asyncio
+            loop = asyncio.get_event_loop()
+            
+            # Run the synchronous method in a thread pool
+            result = await loop.run_in_executor(
+                None, lambda: graph_rag.query(query, param=param)
+            )
+        
+        return {
+            "status": "success",
+            "paper": result
+        }
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        print(f"Error in generate_paper: {str(e)}")
+        print(f"Error type: {type(e)}")
+        raise HTTPException(status_code=500, detail=f"Error generating paper: {str(e)}")
 
 if __name__ == "__main__":
     import uvicorn
