@@ -1,9 +1,9 @@
 from fastapi import FastAPI, HTTPException, UploadFile, File, Query, Body
 import pdfplumber
 from fastapi.middleware.cors import CORSMiddleware
-from contextlib import asynccontextmanager
 from pydantic import ValidationError, EmailStr, BaseModel
 from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.output_parsers import PydanticOutputParser
@@ -11,7 +11,7 @@ import io
 from dotenv import load_dotenv
 import os
 from typing import Optional
-from openai import AsyncOpenAI  # Using AsyncOpenAI
+from openai import OpenAI
 from nano_graphrag import GraphRAG, QueryParam
 
 from question_pipeline.models import (
@@ -123,11 +123,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize AsyncOpenAI client
-client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# Initialize OpenAI client
+client = OpenAI(api_key=os.getenv("GROQ_API_KEY"))
 
 # Initialize LLM instances
 groq = ChatOpenAI(model="gpt-4o")
+# groq = ChatGroq(model="deepseek-r1-distill-llama-70b")
 
 # Data model for the content save endpoint
 class ContentData(BaseModel):
@@ -185,10 +186,10 @@ def generate_questions(request_data: dict, question_type: str = "mcq"):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
 
-async def process_syllabus(syllabus_text: str):
+def process_syllabus(syllabus_text: str):
     """Process syllabus text with OpenAI and return structured content"""
     try:
-        response = await client.chat.completions.create(
+        response = client.chat.completions.create(
             model="gpt-4o",
             messages=[
                 {"role": "system", "content": SYLLABUS_PROMPT},
@@ -200,10 +201,10 @@ async def process_syllabus(syllabus_text: str):
         print(f"Error processing syllabus: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error processing syllabus: {str(e)}")
 
-async def process_pyq(pyq_text: str):
+def process_pyq(pyq_text: str):
     """Process PYQ text with OpenAI and return structured content"""
     try:
-        response = await client.chat.completions.create(
+        response = client.chat.completions.create(
             model="gpt-4o",
             messages=[
                 {"role": "system", "content": PYQ_PROMPT},
@@ -257,24 +258,26 @@ async def upload_pdf(file: UploadFile = File(...)):
         pdf_file.close()
 
 @app.post("/content/save")
-async def save_content(data: ContentData):
+def save_content(data: ContentData):
     """
     Process and save syllabus and optional PYQ content directly to GraphRAG.
     """
     try:
-        # Process syllabus (mandatory)
         print(f"Processing syllabus content from user: {data.user}")
-        processed_syllabus = await process_syllabus(data.syllabus)
         
-        # Add processed syllabus to GraphRAG with detailed error handling
+        # Process syllabus (mandatory)
+        processed_syllabus = process_syllabus(data.syllabus)
+        print(processed_syllabus[:50])
+        
+        # Add processed syllabus to GraphRAG
         try:
             print("Attempting to insert syllabus into GraphRAG...")
             print(f"Syllabus content type: {type(processed_syllabus)}")
             print(f"Syllabus content length: {len(processed_syllabus)}")
             print(f"First 100 chars: {processed_syllabus[:100]}...")
             
-            # Use the async version of insert instead of the synchronous one
-            await graph_rag.ainsert(processed_syllabus)
+            # Insert into global graph
+            graph_rag.insert(processed_syllabus)
             print("✓ Syllabus added to GraphRAG")
         except Exception as insert_err:
             print(f"Error during syllabus insert: {str(insert_err)}")
@@ -284,11 +287,12 @@ async def save_content(data: ContentData):
         # Process PYQ if provided
         if data.pyq:
             print("Processing PYQ content...")
-            processed_pyq = await process_pyq(data.pyq)
+            processed_pyq = process_pyq(data.pyq)
+            print(processed_pyq[:50])
             
-            # Add processed PYQ to GraphRAG using async method
+            # Add processed PYQ to GraphRAG
             try:
-                await graph_rag.ainsert(processed_pyq)
+                graph_rag.insert(processed_pyq)
                 print("✓ PYQ added to GraphRAG")
             except Exception as pyq_err:
                 print(f"Error during PYQ insert: {str(pyq_err)}")
@@ -311,27 +315,25 @@ async def save_content(data: ContentData):
         raise HTTPException(status_code=500, detail=f"Error saving content: {str(e)}")
     
 @app.post("/graph/query")
-async def query_graph(query: str = Body(..., embed=True), mode: str = Body("global", embed=True)):
+def query_graph(
+    query: str = Body(..., embed=True), 
+    mode: str = Body("global", embed=True)
+):
     """
     Query the knowledge graph with the provided query string.
     """
     try:
-        # Always create a QueryParam object, regardless of mode
-        param = QueryParam(mode=mode)
+        # Use global graph for all queries
+        print(f"Querying graph with mode: {mode}")
         
-        # Check if GraphRAG query is async or sync
-        if hasattr(graph_rag, 'aquery') and callable(graph_rag.aquery):
-            # If there's an async version, use it
-            result = await graph_rag.aquery(query, param=param)
+        # Create a QueryParam object if mode is specified
+        param = QueryParam(mode=mode) if mode != "global" else None
+        
+        # Execute the query
+        if mode == "global":
+            result = graph_rag.query(query)
         else:
-            # Use synchronous version in a way that doesn't block the event loop
-            import asyncio
-            loop = asyncio.get_event_loop()
-            
-            # Run the synchronous method in a thread pool
-            result = await loop.run_in_executor(
-                None, lambda: graph_rag.query(query, param=param)
-            )
+            result = graph_rag.query(query, param=param)
         
         return {
             "status": "success", 
@@ -388,29 +390,18 @@ async def generate_long_answer(
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/generate/paper")
-async def generate_paper(marks: int = Body(60, embed=True)):
+def generate_paper(marks: int = Body(60, embed=True)):
     """
     Generate a complete question paper using the knowledge in GraphRAG.
     """
     try:
         query = f"Create a {marks} Marks Question Paper using your knowledge of syllabus and PYQs"
         
-        # Always create a QueryParam object with "global" mode
-        param = QueryParam(mode="global")
+        # Use global graph for all paper generation
+        print("Generating paper using global graph")
         
-        # Check if GraphRAG query is async or sync
-        if hasattr(graph_rag, 'aquery') and callable(graph_rag.aquery):
-            # If there's an async version, use it
-            result = await graph_rag.aquery(query, param=param)
-        else:
-            # Use synchronous version in a way that doesn't block the event loop
-            import asyncio
-            loop = asyncio.get_event_loop()
-            
-            # Run the synchronous method in a thread pool
-            result = await loop.run_in_executor(
-                None, lambda: graph_rag.query(query, param=param)
-            )
+        # Execute the query with global mode
+        result = graph_rag.query(query)
         
         return {
             "status": "success",
@@ -422,6 +413,28 @@ async def generate_paper(marks: int = Body(60, embed=True)):
         print(f"Error in generate_paper: {str(e)}")
         print(f"Error type: {type(e)}")
         raise HTTPException(status_code=500, detail=f"Error generating paper: {str(e)}")
+    
+@app.get("/graph/status")
+def graph_status():
+    """Return status information about the graph database"""
+    try:
+        # Get statistics on the database
+        doc_count = len(graph_rag._kv_store.full_docs) if hasattr(graph_rag, '_kv_store') else 0
+        chunk_count = len(graph_rag._kv_store.text_chunks) if hasattr(graph_rag, '_kv_store') else 0
+        
+        return {
+            "status": "success",
+            "data": {
+                "document_count": doc_count,
+                "chunk_count": chunk_count,
+                "working_dir": graph_rag.working_dir
+            }
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "error": str(e)
+        }
 
 if __name__ == "__main__":
     import uvicorn

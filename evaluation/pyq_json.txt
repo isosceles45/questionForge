@@ -1,0 +1,208 @@
+{
+  "questions": [
+    {
+      "id": "Q1a_2019",
+      "text": "Explain types of reinforcement learning.",
+      "topic": "Reinforcement Learning Fundamentals",
+      "subtopic": "Types of RL"
+    },
+    {
+      "id": "Q1b_2019",
+      "text": "What are the methods used for policy evaluation?",
+      "topic": "Policy Methods",
+      "subtopic": "Policy Evaluation"
+    },
+    {
+      "id": "Q1c_2019",
+      "text": "How does TD prediction differ from Monte Carlo prediction?",
+      "topic": "Prediction Methods",
+      "subtopic": "TD vs Monte Carlo"
+    },
+    {
+      "id": "Q1d_2019",
+      "text": "Describe the main components of an elevator dispatching system.",
+      "topic": "RL Applications",
+      "subtopic": "Elevator Dispatching System"
+    },
+    {
+      "id": "Q2a_2019",
+      "text": "You are playing a slot machine with three arms. Each time you pull an arm, you either win $1 or lose $1 with equal probability. You decide to randomly choose an arm to pull each time. If you play the slot machine 100 times, how much money do you expect to win or lose on average?",
+      "topic": "Multi-armed Bandits",
+      "subtopic": "Expected Value"
+    },
+    {
+      "id": "Q2b_2019",
+      "text": "Explain with an example scenario where Monte Carlo control might be applied.",
+      "topic": "Monte Carlo Methods",
+      "subtopic": "Monte Carlo Control"
+    },
+    {
+      "id": "Q3a_2019",
+      "text": "Imagine you're designing a simple game where a player controls a character to navigate through a maze to reach a treasure chest. The player receives a reward of +10 points upon reaching the treasure chest and -1 point for each move taken. Assume the player starts at the entrance of the maze. 1. If the player reaches the treasure chest in 15 moves, what is their total reward? 2. If the player reaches the treasure chest in 20 moves, what is their total reward? 3. What is the maximum possible reward the player can achieve in this game? 4. What would be the reward if the player gets stuck in the maze indefinitely?",
+      "topic": "Reward Design",
+      "subtopic": "Reward Calculation"
+    },
+    {
+      "id": "Q3b_2019",
+      "text": "Explain the advantages and disadvantages of asynchronous updates in dynamic programming.",
+      "topic": "Dynamic Programming",
+      "subtopic": "Asynchronous Updates"
+    },
+    {
+      "id": "Q4a_2019",
+      "text": "Describe the Q-learning algorithm for TD control.",
+      "topic": "Temporal Difference Learning",
+      "subtopic": "Q-Learning"
+    },
+    {
+      "id": "Q4b_2019",
+      "text": "Explain the exploration-exploitation trade-off and its significance in reinforcement learning.",
+      "topic": "Exploration Strategies",
+      "subtopic": "Exploration-Exploitation Trade-off"
+    },
+    {
+      "id": "Q5a_2019",
+      "text": "Explain the difference between first-visit every-visit Monte Carlo policy evaluation methods.",
+      "topic": "Monte Carlo Methods",
+      "subtopic": "Policy Evaluation"
+    },
+    {
+      "id": "Q5b_2019",
+      "text": "Explain how scheduling algorithms optimize routes, minimize delivery times, and allocate resources effectively to meet customer demands while reducing operational costs.",
+      "topic": "RL Applications",
+      "subtopic": "Scheduling Algorithms"
+    },
+    {
+      "id": "Q6a_2019",
+      "text": "Describe the components of an MDP, including states, actions, transition probabilities, and rewards.",
+      "topic": "Markov Decision Processes",
+      "subtopic": "MDP Components"
+    },
+    {
+      "id": "Q6b_2019",
+      "text": "What are the advantages and disadvantages of action-value methods compared to other reinforcement learning techniques?",
+      "topic": "Action-Value Methods",
+      "subtopic": "Comparative Analysis"
+    },
+    {
+      "id": "Q1a_PYQ",
+      "text": "Compare reinforcement learning with supervised and unsupervised learning. Explain the comparison criteria in short.",
+      "topic": "Reinforcement Learning Fundamentals",
+      "subtopic": "Learning Paradigms Comparison"
+    },
+    {
+      "id": "Q1b_PYQ",
+      "text": "Differentiate between off-policy and on-policy learning in the context of reinforcement learning.",
+      "topic": "Policy Learning",
+      "subtopic": "Off-policy vs On-policy"
+    },
+    {
+      "id": "Q1c_PYQ",
+      "text": "Discuss the significance of the discount factor in reinforcement learning. Elaborate on how the discount factor influences the agent's decision-making process and the trade-offs involved in selecting different values for the discount factor.",
+      "topic": "Reward Design",
+      "subtopic": "Discount Factor"
+    },
+    {
+      "id": "Q1d_PYQ",
+      "text": "Explain the concept of Optimistic Initial Values in the context of reinforcement learning. Provide a brief description of how optimistic initial values influence the exploration-exploitation trade-off.",
+      "topic": "Exploration Strategies",
+      "subtopic": "Optimistic Initial Values"
+    },
+    {
+      "id": "Q1e_PYQ",
+      "text": "Explain how reinforcement learning can be applied to enhance the performance of a mobile robot tasked with collecting empty soda cans in an office environment. Briefly outline the key components or considerations in designing a reinforcement learning framework for this specific task.",
+      "topic": "RL Applications",
+      "subtopic": "Robotics"
+    },
+    {
+      "id": "Q1f_PYQ",
+      "text": "Define the concepts of goals and rewards in the context of a Markov Decision Process (MDP). Additionally, briefly explain the terms returns and episodes in the context of reinforcement learning.",
+      "topic": "Markov Decision Processes",
+      "subtopic": "MDP Concepts"
+    },
+    {
+      "id": "Q2a_PYQ",
+      "text": "Discuss the Upper-Confidence-Bound (UCB) Action Selection method in the context of multi-armed bandits. Provide a detailed explanation of how UCB balances exploration and exploitation in the decision-making process. Additionally, outline the key components involved in the UCB formula and how they contribute to the algorithm's effectiveness. Also discuss any potential challenges or considerations associated with the application of UCB.",
+      "topic": "Multi-armed Bandits",
+      "subtopic": "UCB Action Selection"
+    },
+    {
+      "id": "Q2b_PYQ",
+      "text": "Examine the Gradient Bandit Algorithms in the context of reinforcement learning. Discuss the fundamental principles underlying these algorithms, including the concept of softmax action selection and the role of preferences. Explain how the update rules in the algorithm adapt the preferences based on rewards and provide a comparison with other bandit algorithms, highlighting the advantages and potential limitations of Gradient Bandit Algorithms. Also discuss the impact of the learning rate on the algorithm's performance and convergence.",
+      "topic": "Multi-armed Bandits",
+      "subtopic": "Gradient Bandit Algorithms"
+    },
+    {
+      "id": "Q3a_PYQ",
+      "text": "Consider an MDP with three states, denoted as A, B, and C, arranged in a loop. The transitions and actions are as follows: [Diagram of MDP] In each state, there are two possible actions: 'Moves' and 'Stays.' A reward of 1 is received when the agent takes the 'Moves' action in state C. All other transitions result in a reward of 0. Assume the agent starts in state A, discount factor (γ)=0.9 and learning rate (α)=1. Show the Q values for 3 iterations using the Q-learning algorithm.",
+      "topic": "Temporal Difference Learning",
+      "subtopic": "Q-Learning Iterations"
+    },
+    {
+      "id": "Q3b_PYQ",
+      "text": "Show the Q values for 3 iterations using the SARSA algorithm.",
+      "topic": "Temporal Difference Learning",
+      "subtopic": "SARSA Iterations"
+    },
+    {
+      "id": "Q1a_PYQ2",
+      "text": "Explain the Policy Improvement Theorem in the context of Reinforcement Learning. Describe the fundamental principle behind the theorem and its proof. Discuss the implications of the theorem on the iterative process of policy iteration.",
+      "topic": "Policy Methods",
+      "subtopic": "Policy Improvement Theorem"
+    },
+    {
+      "id": "Q1b_PYQ2",
+      "text": "Compare SARSA and Q-learning, highlighting the difference between on-policy and off-policy methods. Provide a suitable example.",
+      "topic": "Temporal Difference Learning",
+      "subtopic": "SARSA vs Q-Learning"
+    },
+    {
+      "id": "Q2a_PYQ2",
+      "text": "Differentiate between model-based and model-free types of Reinforcement Learning (RL). Discuss the advantages and limitations of each approach, providing real-world examples where each type would be most suitable.",
+      "topic": "RL Approaches",
+      "subtopic": "Model-based vs Model-free"
+    },
+    {
+      "id": "Q2b_PYQ2",
+      "text": "Discuss the Iterative Policy Evaluation with the help of a suitable example.",
+      "topic": "Policy Methods",
+      "subtopic": "Iterative Policy Evaluation"
+    },
+    {
+      "id": "Q3a_PYQ2",
+      "text": "Explain the Markov properties and their role in constructing Markov Decision Processes (MDPs) in Reinforcement Learning. Formulate an MDP scenario depicting a bot collecting empty soda cans in an office environment as an illustration of how Markov properties are applied to model complex decision-making tasks.",
+      "topic": "Markov Decision Processes",
+      "subtopic": "Markov Properties"
+    },
+    {
+      "id": "Q4a_PYQ2",
+      "text": "Explore Upper-Confidence-Bound (UCB) Action Selection in multi-armed bandits. Analyze UCB's formula and address potential application challenges.",
+      "topic": "Multi-armed Bandits",
+      "subtopic": "UCB Action Selection"
+    },
+    {
+      "id": "Q4b_PYQ2",
+      "text": "Discuss the k-armed bandit problem, focusing on exploration-exploitation trade-offs. Discuss four practical applications of k-armed bandit problem, across different domains, showcasing its adaptability in optimizing decision-making processes.",
+      "topic": "Multi-armed Bandits",
+      "subtopic": "K-armed Bandit Applications"
+    },
+    {
+      "id": "Q4c_PYQ2",
+      "text": "Describe the concept of Monte Carlo Prediction in Reinforcement Learning. Write the pseudocode for first-visit Monte Carlo Prediction. Discuss the advantage of employing Monte Carlo methods over Dynamic Programming (DP) methods specifically in the context of the blackjack game.",
+      "topic": "Monte Carlo Methods",
+      "subtopic": "Monte Carlo Prediction"
+    },
+    {
+      "id": "Q5a_PYQ2",
+      "text": "Design a Reinforcement Learning algorithm to optimize Dynamic Channel Allocation in a wireless communication network. Provide the state representation, action space, reward function, and exploration strategy. Discuss any one potential challenge in implementing such an algorithm in a real-world scenario.",
+      "topic": "RL Applications",
+      "subtopic": "Dynamic Channel Allocation"
+    },
+    {
+      "id": "Q5b_PYQ2",
+      "text": "In the context of reinforcement learning evaluate the concepts of Goals, Rewards, Returns, Episodes and Discounting. Discuss the conventional representations and mathematical formulations associated with Goals, Rewards, Returns, Episodes and Discounting.",
+      "topic": "Reinforcement Learning Fundamentals",
+      "subtopic": "Core Concepts"
+    }
+  ]
+}

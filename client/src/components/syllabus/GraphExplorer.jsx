@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import ReactMarkdown from "react-markdown";
 
 const GraphExplorer = () => {
   const [query, setQuery] = useState("");
@@ -103,6 +104,8 @@ const GraphExplorer = () => {
       query: "What types of questions were asked in previous exams?",
     },
   ];
+
+  console.log(paperResult);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 text-gray-800 py-12">
@@ -335,8 +338,8 @@ const GraphExplorer = () => {
               {queryResult && (
                 <div className="mt-6">
                   <h3 className="font-medium text-gray-700 mb-2">Results</h3>
-                  <div className="p-4 bg-white/80 border border-gray-200 rounded-lg whitespace-pre-wrap">
-                    {queryResult}
+                  <div className="p-4 bg-white/80 border border-gray-200 rounded-lg overflow-auto prose prose-blue max-w-none">
+                    <ReactMarkdown>{queryResult}</ReactMarkdown>
                   </div>
                 </div>
               )}
@@ -437,8 +440,8 @@ const GraphExplorer = () => {
                   <h3 className="font-medium text-gray-700 mb-2">
                     Generated Question Paper
                   </h3>
-                  <div className="p-6 bg-white/80 border border-gray-200 rounded-lg shadow-md whitespace-pre-wrap">
-                    {paperResult}
+                  <div className="p-6 bg-white/80 border border-gray-200 rounded-lg shadow-md overflow-auto prose prose-blue max-w-none">
+                    <ReactMarkdown>{paperResult}</ReactMarkdown>
                   </div>
                   <div className="mt-4 flex justify-end">
                     <button

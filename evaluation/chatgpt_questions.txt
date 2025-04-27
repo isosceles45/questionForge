@@ -1,0 +1,244 @@
+{
+  "questions": [
+    {
+      "question": "Define the key features and elements of Reinforcement Learning. How do they differ from supervised learning?",
+      "blooms_taxonomy": "remember",
+      "metadata": {
+        "topic": "Introduction to Reinforcement Learning",
+        "subtopics": ["Key Features of RL", "Comparison with Supervised Learning"]
+      }
+    },
+    {
+      "question": "Explain the working principle of the SARSA algorithm with the help of a simple example.",
+      "blooms_taxonomy": "understand",
+      "metadata": {
+        "topic": "Introduction to Reinforcement Learning",
+        "subtopics": ["SARSA Algorithm", "RL Algorithms"]
+      }
+    },
+    {
+      "question": "Apply the Upper-Confidence-Bound (UCB) action selection strategy to solve a 5-armed bandit problem for 10 time steps. Show your calculations.",
+      "blooms_taxonomy": "apply",
+      "metadata": {
+        "topic": "Bandit problems and online learning",
+        "subtopics": ["UCB Action Selection", "n-Armed Bandit Problem"]
+      }
+    },
+    {
+      "question": "Analyze the differences between Optimistic Initial Values and Epsilon-Greedy methods for action selection in non-stationary environments.",
+      "blooms_taxonomy": "analyze",
+      "metadata": {
+        "topic": "Bandit problems and online learning",
+        "subtopics": ["Optimistic Initial Values", "Action-Value Methods"]
+      }
+    },
+    {
+      "question": "Given a Markov Decision Process (MDP) with a specific transition matrix and reward structure, compute the value function for a deterministic policy.",
+      "blooms_taxonomy": "apply",
+      "metadata": {
+        "topic": "Markov Decision Processes",
+        "subtopics": ["Value Functions", "Policy Evaluation"]
+      }
+    },
+    {
+      "question": "Evaluate the benefits and drawbacks of using Asynchronous Dynamic Programming compared to Synchronous methods in solving large-scale MDPs.",
+      "blooms_taxonomy": "evaluate",
+      "metadata": {
+        "topic": "Dynamic Programming",
+        "subtopics": ["Asynchronous Dynamic Programming", "Policy Iteration"]
+      }
+    },
+    {
+      "question": "Design a simple Monte Carlo Control experiment for policy optimization in a blackjack game environment.",
+      "blooms_taxonomy": "create",
+      "metadata": {
+        "topic": "Monte Carlo Methods and Temporal-Difference Learning",
+        "subtopics": ["Monte Carlo Control", "Policy Optimization"]
+      }
+    },
+    {
+      "question": "Compare the performance of Temporal-Difference learning and Monte Carlo methods when applied to a simple grid world environment.",
+      "blooms_taxonomy": "analyze",
+      "metadata": {
+        "topic": "Monte Carlo Methods and Temporal-Difference Learning",
+        "subtopics": ["TD Prediction", "Monte Carlo Prediction"]
+      }
+    },
+    {
+      "question": "Discuss how Reinforcement Learning can be applied to the Elevator Dispatching problem. Identify key challenges and possible solutions.",
+      "blooms_taxonomy": "evaluate",
+      "metadata": {
+        "topic": "Applications and Case Studies",
+        "subtopics": ["Elevator Dispatching", "Industrial Applications of RL"]
+      }
+    },
+    {
+      "question": "Create a reinforcement learning framework to dynamically allocate wireless channels among users in a mobile network. Briefly outline the states, actions, and rewards.",
+      "blooms_taxonomy": "create",
+      "metadata": {
+        "topic": "Applications and Case Studies",
+        "subtopics": ["Dynamic Channel Allocation", "Control Problems"]
+      }
+    },
+    {
+      "question": "What is the role of probability distributions and expected values in Reinforcement Learning? Provide an example.",
+      "blooms_taxonomy": "understand",
+      "metadata": {
+        "topic": "Prerequisite",
+        "subtopics": ["Probability Distributions", "Expected Values"]
+      }
+    },
+    {
+      "question": "Differentiate between Q-Learning and SARSA in terms of policy behavior during learning.",
+      "blooms_taxonomy": "analyze",
+      "metadata": {
+        "topic": "Introduction to Reinforcement Learning",
+        "subtopics": ["Q-Learning", "SARSA"]
+      }
+    },
+    {
+      "question": "Implement an epsilon-greedy strategy for solving an n-armed bandit problem. Assume epsilon = 0.1.",
+      "blooms_taxonomy": "apply",
+      "metadata": {
+        "topic": "Bandit problems and online learning",
+        "subtopics": ["Action-Value Methods", "Epsilon-Greedy Strategy"]
+      }
+    },
+    {
+      "question": "Explain the significance of the Markov Property in Reinforcement Learning. Why is it crucial for defining MDPs?",
+      "blooms_taxonomy": "understand",
+      "metadata": {
+        "topic": "Markov Decision Processes",
+        "subtopics": ["Markov Property", "Markov Decision Process"]
+      }
+    },
+    {
+      "question": "Solve a simple Value Iteration problem for a 3-state MDP with given transition probabilities and rewards until convergence.",
+      "blooms_taxonomy": "apply",
+      "metadata": {
+        "topic": "Dynamic Programming",
+        "subtopics": ["Value Iteration", "Optimal Value Functions"]
+      }
+    },
+    {
+      "question": "Critique the limitations of Monte Carlo methods in environments with delayed rewards.",
+      "blooms_taxonomy": "evaluate",
+      "metadata": {
+        "topic": "Monte Carlo Methods and Temporal-Difference Learning",
+        "subtopics": ["Monte Carlo Prediction", "Delayed Rewards"]
+      }
+    },
+    {
+      "question": "Design a Temporal-Difference learning experiment to teach an agent to navigate a maze. Define the states, actions, and rewards clearly.",
+      "blooms_taxonomy": "create",
+      "metadata": {
+        "topic": "Monte Carlo Methods and Temporal-Difference Learning",
+        "subtopics": ["TD Learning", "Maze Navigation"]
+      }
+    },
+    {
+      "question": "Analyze how Job-Shop Scheduling can be framed as a Reinforcement Learning problem. What would be the agent’s objective?",
+      "blooms_taxonomy": "analyze",
+      "metadata": {
+        "topic": "Applications and Case Studies",
+        "subtopics": ["Job-Shop Scheduling", "Industrial Applications of RL"]
+      }
+    },
+    {
+      "question": "Summarize the concept of Generalized Policy Iteration (GPI) and discuss its role in reinforcement learning.",
+      "blooms_taxonomy": "remember",
+      "metadata": {
+        "topic": "Dynamic Programming",
+        "subtopics": ["Generalized Policy Iteration", "Policy Improvement"]
+      }
+    },
+    {
+      "question": "Propose a hybrid strategy combining Monte Carlo and Temporal-Difference methods for a recommendation system. Justify your design choices.",
+      "blooms_taxonomy": "create",
+      "metadata": {
+        "topic": "Monte Carlo Methods and Temporal-Difference Learning",
+        "subtopics": ["Hybrid Methods", "Recommendation Systems"]
+      }
+    },
+    {
+      "question": "List and briefly describe the types of Reinforcement Learning covered in the course.",
+      "blooms_taxonomy": "remember",
+      "metadata": {
+        "topic": "Introduction to Reinforcement Learning",
+        "subtopics": ["Types of RL", "Key Features of RL"]
+      }
+    },
+    {
+      "question": "Illustrate with an example how tracking a non-stationary problem differs from solving a stationary one in the context of Bandit problems.",
+      "blooms_taxonomy": "understand",
+      "metadata": {
+        "topic": "Bandit problems and online learning",
+        "subtopics": ["Tracking Nonstationary Problems", "Action-Value Methods"]
+      }
+    },
+    {
+      "question": "Apply the Gradient Bandits method to optimize the action selection for a dynamic environment. Show the update steps.",
+      "blooms_taxonomy": "apply",
+      "metadata": {
+        "topic": "Bandit problems and online learning",
+        "subtopics": ["Gradient Bandits", "Online Learning"]
+      }
+    },
+    {
+      "question": "Analyze the trade-offs between policy evaluation and policy improvement when applying Dynamic Programming.",
+      "blooms_taxonomy": "analyze",
+      "metadata": {
+        "topic": "Dynamic Programming",
+        "subtopics": ["Policy Evaluation", "Policy Improvement"]
+      }
+    },
+    {
+      "question": "Compute the expected return for an agent following a stochastic policy in a given Markov Decision Process.",
+      "blooms_taxonomy": "apply",
+      "metadata": {
+        "topic": "Markov Decision Processes",
+        "subtopics": ["Returns", "Stochastic Policies"]
+      }
+    },
+    {
+      "question": "Evaluate the effectiveness of using optimistic initial values versus UCB in exploration during online learning.",
+      "blooms_taxonomy": "evaluate",
+      "metadata": {
+        "topic": "Bandit problems and online learning",
+        "subtopics": ["Optimistic Initial Values", "Upper-Confidence-Bound (UCB)"]
+      }
+    },
+    {
+      "question": "Devise an RL-based strategy for autonomous warehouse management. Outline the states, actions, rewards, and policies involved.",
+      "blooms_taxonomy": "create",
+      "metadata": {
+        "topic": "Applications and Case Studies",
+        "subtopics": ["Industrial Applications", "Control Problems"]
+      }
+    },
+    {
+      "question": "Compare and contrast TD(0) and TD(λ) methods in temporal-difference learning. When would you prefer one over the other?",
+      "blooms_taxonomy": "analyze",
+      "metadata": {
+        "topic": "Monte Carlo Methods and Temporal-Difference Learning",
+        "subtopics": ["TD Prediction", "TD Lambda"]
+      }
+    },
+    {
+      "question": "Explain the concept of Asynchronous Dynamic Programming. How does it help in real-time RL applications?",
+      "blooms_taxonomy": "understand",
+      "metadata": {
+        "topic": "Dynamic Programming",
+        "subtopics": ["Asynchronous Dynamic Programming", "Real-time Applications"]
+      }
+    },
+    {
+      "question": "Propose modifications to a standard Q-Learning algorithm to handle large or continuous action spaces efficiently.",
+      "blooms_taxonomy": "create",
+      "metadata": {
+        "topic": "Monte Carlo Methods and Temporal-Difference Learning",
+        "subtopics": ["Q-Learning Extensions", "Continuous Action Spaces"]
+      }
+    }
+  ]
+}
