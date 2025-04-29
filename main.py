@@ -8,17 +8,18 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.output_parsers import PydanticOutputParser
 import io
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
 from typing import Optional
 from openai import OpenAI
 from nano_graphrag import GraphRAG, QueryParam
 
 from question_pipeline.models import (
     MCQList, FIBList, ShortAnswerList, LongAnswerList,
-    QuestionRequest
+    QuestionRequest, QuestionSimilarityRequest, SyllabusCoverageRequest, QuestionPaper, PaperGenerationRequest
 )
-from question_pipeline.prompts import MCQ_TEMPLATE, FIB_TEMPLATE, SHORT_ANSWER_TEMPLATE, LONG_ANSWER_TEMPLATE
+from question_pipeline.prompts import MCQ_TEMPLATE, FIB_TEMPLATE, SHORT_ANSWER_TEMPLATE, LONG_ANSWER_TEMPLATE, \
+    SYLLABUS_PROMPT, PYQ_PROMPT, PAPER_TEMPLATE_RAG
 
 # Load environment variables
 load_dotenv()
@@ -27,90 +28,6 @@ load_dotenv()
 GRAPH_DIR = "graph_rag/Graph"
 os.makedirs(GRAPH_DIR, exist_ok=True)
 graph_rag = GraphRAG(working_dir=GRAPH_DIR)
-
-# System prompts for processing syllabus and PYQ content
-SYLLABUS_PROMPT = """
-# Task
-You are an expert education analyst extracting structured information from a course Syllabus. Your task is to identify and extract the hierarchical structure of topics and subtopics from this Syllabus document.
-
-## Instructions
-- Carefully read the provided Syllabus document
-- Extract the hierarchical structure of topics and subtopics
-- Preserve ALL original organization, numbering schemes, and formatting
-- Include EVERY detail about each topic - do not summarize or omit information
-- Preserve all learning objectives or outcomes associated with topics
-- Include all reference books, materials, or resources mentioned
-- DO NOT miss any detail from the original document, no matter how minor it seems
-
-## Response Format
-Respond with a clear, structured text format:
-
-SUBJECT: [Course name and code]
-DESCRIPTION: [Full course description]
-
-TOPICS:
-1. [Topic Title]
-   Description: [Complete topic description with all details]
-   Learning Objectives: [All learning objectives for this topic]
-   
-   Subtopics:
-   1.1 [Subtopic Title]
-       [Full subtopic description with all details]
-   1.2 [Subtopic Title]
-       [Full subtopic description with all details]
-   ...
-
-2. [Topic Title]
-   ...
-
-REFERENCES:
-- [Reference 1]
-- [Reference 2]
-...
-
-## Important Note
-Do not summarize or condense information. Include EVERY detail from the original document.
-"""
-
-PYQ_PROMPT = """
-# Task
-You are an expert education analyst extracting questions from previous year question papers. Your task is to identify each question and classify it according to its topic and subtopic in the course Syllabus.
-
-## Instructions
-- Carefully read the provided question paper
-- Extract each question COMPLETELY, preserving all parts, sub-questions, and marks allocation
-- Include ALL text formatting, numbering, and special instructions from the original
-- Identify the most likely topic and subtopic from the Syllabus that each question relates to
-- Note the difficulty level, cognitive domain (knowledge, comprehension, application, analysis, etc.), and marks allocated
-- Do not omit ANY part of the question, including diagrams (describe them), formulas, or instructions
-
-## Response Format
-Respond with a clearly structured text format:
-
-EXAM DETAILS:
-Year: [YEAR]
-Semester: [SEMESTER]
-Subject: [SUBJECT_NAME]
-Total Marks: [TOTAL_MARKS]
-Duration: [DURATION]
-
-QUESTIONS:
----------------------
-Question 1: [COMPLETE question text with ALL formatting preserved]
-Topic: [Related Topic]
-Subtopic: [Related Subtopic]
-Marks: [Marks]
-Difficulty: [Easy/Medium/Hard]
-Cognitive Level: [Knowledge/Comprehension/Application/Analysis/etc.]
-Question Type: [Short Answer/Long Answer/MCQ/etc.]
----------------------
-
-Question 2: [COMPLETE question text with ALL formatting preserved]
-...
-
-## Important Note
-The extraction must be EXHAUSTIVE and COMPLETE. Don't miss any detail, instruction, or part of any question.
-"""
 
 app = FastAPI(title="Question Generator API")
 
@@ -389,52 +306,126 @@ async def generate_long_answer(
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.post("/generate/paper")
-def generate_paper(marks: int = Body(60, embed=True)):
+@app.post("/generate/paper", response_model=QuestionPaper)
+def generate_paper(request: PaperGenerationRequest):
     """
-    Generate a complete question paper using the knowledge in GraphRAG.
+    Generate a complete question paper using the knowledge in GraphRAG with Pydantic parsing.
+    GraphRAG already contains subject syllabus and previous question information.
     """
+    parser = PydanticOutputParser(pydantic_object=QuestionPaper)
+    format_instructions = parser.get_format_instructions()
+
+    # Default to three equal sections if not specified
+    if request.section_distribution is None:
+        section_marks = [request.total_marks // request.num_sections] * request.num_sections
+        # Adjust for any remainder
+        remainder = request.total_marks % request.num_sections
+        for i in range(remainder):
+            section_marks[i] += 1
+    else:
+        # Validate that the provided section distribution adds up to total marks
+        if sum(request.section_distribution) != request.total_marks:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Section distribution sum ({sum(request.section_distribution)}) must equal total marks ({request.total_marks})"
+            )
+        section_marks = request.section_distribution
+
+    # Format section distribution for the prompt
+    section_info = []
+    for i, marks in enumerate(section_marks, 1):
+        section_info.append(f"Section {i}: {marks} marks")
+    section_distribution_text = "\n".join(section_info)
+
+    # Calculate a reasonable number of questions if not provided
+    total_questions = request.total_questions
+    if total_questions is None:
+        # Simple heuristic: average 5 marks per question
+        total_questions = max(request.total_marks // 5, request.num_sections)
+
+    prompt = PAPER_TEMPLATE_RAG.format(
+        total_marks=request.total_marks,
+        num_sections=request.num_sections,
+        section_distribution=section_distribution_text,
+        total_questions=total_questions,
+        format_instructions=format_instructions
+    )
+
     try:
-        query = f"Create a {marks} Marks Question Paper using your knowledge of syllabus and PYQs"
-        
-        # Use global graph for all paper generation
-        print("Generating paper using global graph")
-        
-        # Execute the query with global mode
-        result = graph_rag.query(query)
-        
-        return {
-            "status": "success",
-            "paper": result
-        }
+        # Execute the query with global mode to access the entire knowledge graph
+        raw_output = graph_rag.query(prompt)
+
+        try:
+            structured: QuestionPaper = parser.parse(raw_output)
+        except ValidationError as exc:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Output did not conform to QuestionPaper schema: {exc}"
+            )
+
+        return structured
+
     except Exception as e:
         import traceback
         traceback.print_exc()
         print(f"Error in generate_paper: {str(e)}")
         print(f"Error type: {type(e)}")
         raise HTTPException(status_code=500, detail=f"Error generating paper: {str(e)}")
-    
-@app.get("/graph/status")
-def graph_status():
-    """Return status information about the graph database"""
+
+@app.post("/check/question_similarity")
+def check_question_similarity(request: QuestionSimilarityRequest):
+    """
+    Check if a question is similar to any existing PYQ questions.
+    """
     try:
-        # Get statistics on the database
-        doc_count = len(graph_rag._kv_store.full_docs) if hasattr(graph_rag, '_kv_store') else 0
-        chunk_count = len(graph_rag._kv_store.text_chunks) if hasattr(graph_rag, '_kv_store') else 0
+        query = f"""
+        Is this question similar to any past question papers? 
+        Question: '{request.question}'
         
+        If similar, return: SIMILAR
+        If not similar, return: UNIQUE
+        
+        Provide a brief explanation of your reasoning in either case.
+        """
+
+        # Use local search mode to focus on finding specific similar questions
+        result = graph_rag.query(query)
+
         return {
             "status": "success",
-            "data": {
-                "document_count": doc_count,
-                "chunk_count": chunk_count,
-                "working_dir": graph_rag.working_dir
-            }
+            "result": result
         }
     except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error checking question similarity: {str(e)}")
+
+@app.post("/analyze/syllabus_coverage")
+def analyze_syllabus_coverage(request: SyllabusCoverageRequest):
+    """Analyze how well a set of questions covers the syllabus"""
+    try:
+        questions_text = "\n\n".join([f"Question {i+1}: {q}" for i, q in enumerate(request.questions)])
+
+        query = f"""
+        Analyze how well the following set of questions covers the course syllabus:
+        
+        {questions_text}
+        
+        Please provide:
+        1. A mapping of each question to the most relevant topic(s) in the syllabus
+        2. A list of important syllabus topics that aren't covered by these questions
+        3. A list of over-represented topics that appear in multiple questions
+        4. An overall assessment of syllabus coverage (as a percentage)
+        5. Recommendations for additional questions to improve coverage
+        """
+
+        result = graph_rag.query(query)
+
         return {
-            "status": "error",
-            "error": str(e)
+            "status": "success",
+            "number_of_questions": len(request.questions),
+            "coverage_analysis": result
         }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error analyzing syllabus coverage: {str(e)}")
 
 if __name__ == "__main__":
     import uvicorn

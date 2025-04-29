@@ -70,8 +70,21 @@ const Header = () => {
 
                 {/* Desktop Navigation */}
                 <nav className="hidden md:flex items-center space-x-6">
+                    <button
+                        onClick={() => navigate("/syllabus")}
+                        className="px-4 py-2 font-semibold text-gray-700 hover:text-blue-600 transition-colors"
+                    >
+                        Syllabus
+                    </button>
+                    <button
+                        onClick={() => navigate("/syllabus/graph")}
+                        className="px-4 py-2 font-semibold text-gray-700 hover:text-blue-600 transition-colors"
+                    >
+                        Graph
+                    </button>
                     {/* Generate button with dropdown */}
                     <div className="relative" ref={generateDropdownRef}>
+
                         <button
                             onClick={toggleGenerateDropdown}
                             className="px-4 py-2 font-semibold text-gray-700 hover:text-blue-600 transition-colors flex items-center"
@@ -108,13 +121,6 @@ const Header = () => {
                             </div>
                         )}
                     </div>
-
-                    <button
-                        onClick={() => navigate("/syllabus")}
-                        className="px-4 py-2 font-semibold text-gray-700 hover:text-blue-600 transition-colors"
-                    >
-                        Syllabus
-                    </button>
                     <SignedOut>
                         <button
                             onClick={() => navigate("/sign-in")}

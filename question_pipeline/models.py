@@ -70,3 +70,35 @@ class QuestionRequest(BaseModel):
     num: int = 1
     word_limit: Optional[int] = None
     marks: Optional[int] = None
+
+class Section(BaseModel):
+    title: str = Field(description="The title of the section")
+    description: Optional[str] = Field(default=None, description="Optional description of the section")
+    total_marks: int = Field(description="Total marks for this section")
+    questions: List[Dict[str, Any]] = Field(description="List of questions in this section")
+
+class QuestionPaper(BaseModel):
+    title: str = Field(description="The title of the question paper")
+    total_marks: int = Field(description="Total marks for the question paper")
+    time_duration: str = Field(description="The time duration for the exam")
+    instructions: List[str] = Field(description="General instructions for the paper")
+    sections: List[Section] = Field(description="Different sections of the question paper")
+    metadata: Dict[str, Any] = Field(default={}, description="Additional metadata for the question paper")
+
+class PaperGenerationRequest(BaseModel):
+    total_marks: int = Field(default=60, description="Total marks for the question paper")
+    num_sections: Optional[int] = Field(default=3, description="Number of sections in the paper")
+    section_distribution: Optional[List[int]] = Field(
+        default=None,
+        description="Optional distribution of marks across sections. Must sum to total_marks."
+    )
+    total_questions: Optional[int] = Field(
+        default=None,
+        description="Total number of questions to include in the paper"
+    )
+
+class QuestionSimilarityRequest(BaseModel):
+    question: str
+
+class SyllabusCoverageRequest(BaseModel):
+    questions: List[str]
